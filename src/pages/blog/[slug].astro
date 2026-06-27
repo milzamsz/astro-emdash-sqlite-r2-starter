@@ -1,0 +1,26 @@
+---
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import { PortableText } from "emdash/ui";
+import PortableHeading from "../../components/blog/PortableHeading.astro";
+import { getPostEntry } from "../../lib/cms";
+
+const { slug } = Astro.params as { slug: string };
+const detail = await getPostEntry(slug);
+if (!detail) return new Response(null, { status: 404 });
+
+const { post, content, headings } = detail;
+const locale = "en";
+
+// Inject matching anchor ids on headings so the table of contents links work.
+const portableComponents = {
+  block: {
+    h2: PortableHeading,
+    h3: PortableHeading,
+    h4: PortableHeading,
+  },
+};
+---
+
+<BlogLayout post={post} locale={locale} headings={headings}>
+  <PortableText value={content} components={portableComponents} />
+</BlogLayout>

@@ -1,0 +1,103 @@
+# Setup & Deployment
+
+This template is server-rendered Astro backed by the EmDash CMS. Local dev uses
+SQLite + local file storage with zero config; production self-hosts on Dokploy
+with SQLite on a persistent volume and media on Cloudflare R2.
+
+## Prerequisites
+
+- Node.js 24+
+- pnpm 8.15+ (`corepack enable && corepack prepare pnpm@8.15.0 --activate`)
+- For production media: a Cloudflare account with an R2 bucket (optional)
+
+## Local development
+
+```bash
+pnpm install
+cp .env.example .env   # optional locally; set SITE_URL for correct prod URLs
+pnpm dev
+```
+
+`pnpm dev` runs `emdash dev`, which:
+
+1. Starts the Astro dev server on http://localhost:4321
+2. Runs database migrations against `./data/emdash.db` (SQLite)
+3. Seeds `seed/seed.json` on first run (collections + starter content)
+
+Then:
+
+- Site: http://localhost:4321 — default locale at `/` and `/id/`, English at `/en/`
+- Admin: http://localhost:4321/_emdash/admin — create the owner account on first visit
+
+Local uploads are written to `./data/uploads` and served by EmDash. The `./data`
+directory is gitignored and safe to delete to reset to a clean seeded state.
+
+## Editing content
+
+- Author the **blog** and **pages** collections in the admin panel.
+- Routes read EmDash at request time via `src/lib/cms.ts`; no rebuild is needed.
+- Run `pnpm types:cms` after changing collection schemas to refresh generated types.
+- Run `pnpm export-seed` to snapshot current content back into a seed file.
+
+## Build
+
+```bash
+pnpm build     # outputs the server build to dist/ (Node adapter, standalone)
+pnpm start     # run the production server: node ./dist/server/entry.mjs
+```
+
+The server listens on `HOST`/`PORT` (defaults `0.0.0.0:4321`).
+
+## Environment variables
+
+Set these in production (Dokploy → service → Environment). See `.env.example`.
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `SITE_URL` | recommended | Public production URL (canonical/OG/sitemap) |
+| `DATABASE_URL` | no | SQLite path; defaults to `file:./data/emdash.db` |
+| `S3_ENDPOINT` | for R2 | R2 S3 endpoint `https://<accountid>.r2.cloudflarestorage.com` |
+| `S3_BUCKET` | for R2 | R2 bucket name (presence of this switches storage to R2) |
+| `S3_ACCESS_KEY_ID` | for R2 | R2 access key (secret) |
+| `S3_SECRET_ACCESS_KEY` | for R2 | R2 secret key (secret) |
+| `S3_REGION` | no | `auto` for R2 |
+| `S3_PUBLIC_URL` | no | Public CDN/custom domain serving media |
+
+If `S3_BUCKET` is empty, EmDash falls back to local filesystem storage under `./data/uploads`.
+
+## Deploy to Dokploy (Docker)
+
+The repo ships a multi-stage `Dockerfile` that builds the standalone Node server.
+
+1. Push the repo to GitHub.
+2. In Dokploy, create an **Application** from the repository (Dockerfile build).
+3. **Mount a persistent volume at `/app/data`** so the SQLite database and any local
+   uploads survive redeploys. (With R2 configured, media goes to R2; the volume still
+   holds the database.)
+4. Set environment variables (`SITE_URL`, the `S3_*` R2 credentials, optional analytics).
+5. Expose port `4321` and point your domain at the service.
+6. Deploy. On first boot, run migrations/seed once (see below).
+
+### Cloudflare R2
+
+Create an R2 bucket and an S3 API token (Access Key ID + Secret). Set `S3_ENDPOINT`,
+`S3_BUCKET`, `S3_ACCESS_KEY_ID`, and `S3_SECRET_ACCESS_KEY`. Optionally connect a custom
+domain to the bucket and set `S3_PUBLIC_URL` so media is served from your CDN domain.
+
+### Seeding / migrations in production
+
+The bundled production server does **not** auto-seed. To initialize a fresh volume,
+run the EmDash CLI once against the mounted data directory (Dokploy shell or a one-off
+job):
+
+```bash
+pnpm exec emdash seed --database data/emdash.db --uploads-dir data/uploads
+```
+
+After the database exists, the running server picks up content immediately. Subsequent
+content edits happen through the admin panel and require no redeploy.
+
+## CI
+
+`.github/workflows/ci.yml` runs lint, type-check, i18n validation, secret
+scanning, dependency review, and a build on every PR.

@@ -1,0 +1,17 @@
+---
+import { slugify } from "../../lib/utils";
+
+interface Props {
+  node?: { style?: string; children?: Array<{ text?: string }> };
+}
+
+const { node } = Astro.props as Props;
+const text = (node?.children ?? [])
+  .map((child) => child?.text ?? "")
+  .join("")
+  .trim();
+const id = slugify(text);
+const Tag = (node?.style ?? "h2") as "h2" | "h3" | "h4" | "h5" | "h6";
+---
+
+<Tag id={id}><slot /></Tag>

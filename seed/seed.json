@@ -1,0 +1,385 @@
+{
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "meta": {
+    "name": "Astro + EmDash Starter",
+    "description": "Marketing + blog starter seeded from the Astro Cloudflare template."
+  },
+  "settings": {
+    "title": "Astro EmDash Starter",
+    "tagline": "A fast marketing + blog site powered by Astro and EmDash."
+  },
+  "collections": [
+    {
+      "slug": "posts",
+      "label": "Posts",
+      "labelSingular": "Post",
+      "description": "Blog posts",
+      "icon": "file-text",
+      "supports": ["drafts", "revisions"],
+      "fields": [
+        { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+        { "slug": "description", "label": "Description", "type": "text" },
+        { "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+        { "slug": "publish_date", "label": "Publish date", "type": "datetime" },
+        { "slug": "author", "label": "Author", "type": "string" },
+        { "slug": "featured", "label": "Featured", "type": "boolean" },
+        { "slug": "tags", "label": "Tags", "type": "json" },
+        { "slug": "svg_slug", "label": "Cover seed", "type": "string" },
+        { "slug": "faqs", "label": "FAQs", "type": "json" }
+      ]
+    },
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "description": "Marketing and legal pages",
+      "icon": "layout",
+      "supports": ["drafts", "revisions"],
+      "fields": [
+        { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+        { "slug": "description", "label": "Description", "type": "text" },
+        { "slug": "sections", "label": "Sections", "type": "json" },
+        { "slug": "content", "label": "Content", "type": "portableText" },
+        { "slug": "is_legal", "label": "Legal page", "type": "boolean" },
+        { "slug": "order", "label": "Order", "type": "integer" }
+      ]
+    }
+  ],
+  "content": {
+    "posts": [
+      {
+        "id": "welcome",
+        "slug": "welcome",
+        "status": "published",
+        "data": {
+          "title": "Welcome to the Blog",
+          "description": "First post about the Astro + EmDash starter.",
+          "publish_date": "2026-06-24T00:00:00.000Z",
+          "author": "Admin",
+          "featured": false,
+          "tags": ["astro", "emdash"],
+          "content": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "This is the first blog post, authored and managed entirely in EmDash and rendered by Astro." }
+              ]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Key features" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "English-first and multilanguage-ready, structured content stored as Portable Text, full-text search, and a Node server you can self-host on Dokploy." }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "getting-started",
+        "slug": "getting-started",
+        "status": "published",
+        "data": {
+          "title": "Getting Started with Astro + EmDash",
+          "description": "A step-by-step guide to building a fast site with Astro and the EmDash CMS.",
+          "publish_date": "2026-06-25T00:00:00.000Z",
+          "author": "Admin",
+          "featured": true,
+          "tags": ["astro", "tutorial", "emdash"],
+          "content": [
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Why This Stack?" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "Astro provides server-rendered pages and an islands architecture, while EmDash supplies a database-backed CMS with an admin panel, media library, and structured content." }
+              ]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Defining Content Types" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "Collections are defined in the seed file or the admin UI. Each collection becomes a real SQL table with typed columns, and you can generate TypeScript types with the emdash types command." }
+              ]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Creating Your First Post" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "Open the admin panel at /_emdash/admin, create a post, and publish it. Astro reads it live via getEmDashCollection — no rebuild required." }
+              ]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Going Further" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "Customize the design tokens, add new collections, and wire up media uploads to Cloudflare R2 for production." }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "seo-multilingual",
+        "slug": "seo-multilingual",
+        "status": "published",
+        "data": {
+          "title": "Optimizing SEO for Multilingual Websites",
+          "description": "Technical SEO best practices for sites with multiple languages.",
+          "publish_date": "2026-06-22T00:00:00.000Z",
+          "author": "Admin",
+          "featured": false,
+          "tags": ["seo", "i18n", "performance"],
+          "content": [
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Why SEO Matters for Multilingual Sites" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "Search engines need clear signals about language and regional targeting. A well-structured multilingual site can rank in multiple countries simultaneously." }
+              ]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Hreflang and Canonicals" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "Hreflang tells search engines which language version to show, and every page should have a self-referencing canonical URL. This starter generates both automatically." }
+              ]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Structured Data and Sitemaps" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                { "_type": "span", "text": "JSON-LD describes your content to search engines, and the sitemap integration includes every locale variant so all language versions are discovered." }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "pages": [
+      {
+        "id": "about",
+        "slug": "about",
+        "status": "published",
+        "data": {
+          "title": "About Us",
+          "description": "Meet the team and vision behind the modern marketing website starter.",
+          "is_legal": false,
+          "order": 1,
+          "sections": [
+            {
+              "type": "hero",
+              "title": "A foundation built for modern marketing sites",
+              "content": "This starter gives you a fast, accessible, and SEO-ready base — English-first and wired for more languages from day one."
+            },
+            {
+              "type": "features",
+              "title": "What we care about",
+              "items": [
+                { "title": "Developer Experience", "description": "Modern tooling, end-to-end type safety, and a layout you can actually navigate.", "icon": "code" },
+                { "title": "Performance First", "description": "Server-rendered and edge-ready, with strong Core Web Vitals out of the box.", "icon": "rocket" },
+                { "title": "Multilanguage Ready", "description": "An i18n engine and localized content, structured for global reach.", "icon": "globe" },
+                { "title": "CMS-Managed Content", "description": "Structured content in EmDash that is editable, versioned, and easy to own.", "icon": "git-branch" }
+              ]
+            },
+            {
+              "type": "cta",
+              "title": "Ready to build?",
+              "content": "Explore the services or browse the docs to get started.",
+              "ctaText": "View services",
+              "ctaHref": "/services"
+            }
+          ]
+        }
+      },
+      {
+        "id": "pricing",
+        "slug": "pricing",
+        "status": "published",
+        "data": {
+          "title": "Pricing",
+          "description": "Choose the plan that fits your marketing website needs.",
+          "is_legal": false,
+          "order": 3,
+          "sections": [
+            {
+              "type": "hero",
+              "title": "Simple, transparent pricing",
+              "content": "Start free and scale as you grow. No hidden fees, cancel anytime."
+            }
+          ]
+        }
+      },
+      {
+        "id": "contact",
+        "slug": "contact",
+        "status": "published",
+        "data": {
+          "title": "Contact",
+          "description": "Get in touch with our team for questions, collaboration, and more information.",
+          "is_legal": false,
+          "order": 4,
+          "sections": [
+            {
+              "type": "hero",
+              "title": "Contact Us",
+              "content": "We'd love to hear from you."
+            },
+            {
+              "type": "features",
+              "title": "Ways to Reach Us",
+              "items": [
+                { "title": "Email", "description": "hello@example.com" },
+                { "title": "Office", "description": "Jakarta, Indonesia" },
+                { "title": "Social", "description": "@astroemdash" }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "privacy",
+        "slug": "privacy",
+        "status": "published",
+        "data": {
+          "title": "Privacy Policy",
+          "description": "Privacy policy for this starter website.",
+          "is_legal": true,
+          "order": 5,
+          "sections": [
+            { "type": "hero", "title": "Privacy Policy", "content": "How we manage and protect your data." }
+          ],
+          "content": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "Last updated: June 24, 2026. This policy explains how this site handles your data. This is placeholder copy provided with the template — replace it with a policy reviewed by your own legal counsel before launch." }]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Information We Collect" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "We collect information you voluntarily provide through contact forms and newsletter signups." }]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Use of Information" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "The information we collect is used to provide services you request, send updates, and improve user experience." }]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Data Protection" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "We implement reasonable security measures to protect your data." }]
+            }
+          ]
+        }
+      },
+      {
+        "id": "terms",
+        "slug": "terms",
+        "status": "published",
+        "data": {
+          "title": "Terms & Conditions",
+          "description": "Terms and conditions for using this starter website.",
+          "is_legal": true,
+          "order": 6,
+          "sections": [
+            { "type": "hero", "title": "Terms & Conditions", "content": "The basic rules for using our website and services." }
+          ],
+          "content": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "Last updated: June 24, 2026. These terms govern your use of this website. This is placeholder copy provided with the template — replace it with terms reviewed by your own legal counsel before launch." }]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Use of Service" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "By using this website, you agree to comply with all applicable laws, not misuse the services, and maintain the confidentiality of your account information." }]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Intellectual Property" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "All content on this website is protected by copyright and other intellectual property rights." }]
+            },
+            {
+              "_type": "block",
+              "style": "h2",
+              "children": [{ "_type": "span", "text": "Limitation of Liability" }]
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [{ "_type": "span", "text": "We are not liable for damages arising from the use of this website." }]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
