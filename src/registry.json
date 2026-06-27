@@ -1,5 +1,5 @@
 {
-  "name": "astro-cloudflare",
+  "name": "astro-emdash-sqlite-r2-starter",
   "description": "Machine-readable catalog of the three-tier architecture: Components -> Sections -> Pages.",
   "tiers": ["component", "section", "page"],
   "importAliases": {

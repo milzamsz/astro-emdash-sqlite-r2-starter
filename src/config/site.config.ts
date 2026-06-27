@@ -92,7 +92,7 @@ export const siteConfig: SiteConfig = {
   /* Core configuration — single source of truth for canonical/OG/sitemap/llms.txt.
    * Replace with your production domain when forking this template. */
   url: "https://astro-cloudflare.pages.dev",
-  name: "Astro Cloudflare",
+  name: "Astro EmDash",
   description:
     "Marketing, blog, and docs starter built with Astro and Cloudflare Pages — multilanguage-ready",
   author: "Your Name",
@@ -103,7 +103,7 @@ export const siteConfig: SiteConfig = {
   socialLinks: [
     {
       platform: "github",
-      url: "https://github.com/your-org/astro-cloudflare",
+      url: "https://github.com/milzamsz/astro-emdash-sqlite-r2-starter",
       label: "GitHub",
     },
     {

@@ -18,7 +18,7 @@ export const SITE_CONFIG = {
     en: "en",
   } as const,
   /** Site name for metadata and JSON-LD. */
-  name: "Astro Cloudflare",
+  name: "Astro EmDash",
   /** Short description for metadata. */
   description: "Marketing, blog, and docs starter — multilanguage-ready.",
 } as const;

@@ -33,9 +33,12 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/seed ./seed
 COPY package.json ./
+COPY docker-entrypoint.sh ./
+RUN chmod +x ./docker-entrypoint.sh
 
 RUN mkdir -p /app/data
 VOLUME ["/app/data"]
 
 EXPOSE 4321
-CMD ["node", "./dist/server/entry.mjs"]
+# Seeds starter content on a fresh volume, then starts the Astro Node server.
+ENTRYPOINT ["./docker-entrypoint.sh"]

@@ -152,10 +152,10 @@ export default defineConfig({
         SiteTitle: "./src/components/docs/SiteTitle.astro",
       },
       editLink: {
-        baseUrl: "https://github.com/your-org/astro-cloudflare/edit/main",
+        baseUrl: "https://github.com/milzamsz/astro-emdash-sqlite-r2-starter/edit/main",
       },
       social: [
-        { icon: "github", label: "GitHub", href: "https://github.com/your-org/astro-cloudflare" },
+        { icon: "github", label: "GitHub", href: "https://github.com/milzamsz/astro-emdash-sqlite-r2-starter" },
       ],
       sidebar: [
         {

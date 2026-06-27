@@ -1,5 +1,5 @@
 {
-  "name": "astro-emdash-cloudflare",
+  "name": "astro-emdash-sqlite-r2-starter",
   "version": "1.0.0",
   "private": true,
   "description": "Marketing + blog + docs starter with Astro and EmDash CMS (SQLite local / Dokploy + R2 in production)",

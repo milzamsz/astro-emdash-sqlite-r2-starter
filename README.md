@@ -15,8 +15,8 @@ A production-ready marketing + blog + docs site built with **Astro 7** and the *
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-org/astro-emdash-cloudflare.git
-cd astro-emdash-cloudflare
+git clone https://github.com/milzamsz/astro-emdash-sqlite-r2-starter.git
+cd astro-emdash-sqlite-r2-starter
 pnpm install
 pnpm dev
 ```

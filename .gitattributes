@@ -1,0 +1,9 @@
+# Normalize line endings; keep shell scripts LF so they run in Linux containers.
+* text=auto eol=lf
+*.sh text eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

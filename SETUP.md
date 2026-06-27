@@ -84,18 +84,26 @@ Create an R2 bucket and an S3 API token (Access Key ID + Secret). Set `S3_ENDPOI
 `S3_BUCKET`, `S3_ACCESS_KEY_ID`, and `S3_SECRET_ACCESS_KEY`. Optionally connect a custom
 domain to the bucket and set `S3_PUBLIC_URL` so media is served from your CDN domain.
 
-### Seeding / migrations in production
+### Database, migrations & seeding
 
-The bundled production server does **not** auto-seed. To initialize a fresh volume,
-run the EmDash CLI once against the mounted data directory (Dokploy shell or a one-off
-job):
+The SQLite database is **runtime state**, not source code — it lives on the `/app/data`
+volume and is intentionally gitignored. It gets there as follows:
+
+- **Schema migrations** run automatically the first time the server handles a request,
+  so the database file and tables are created on the volume with no manual step.
+- **Starter content** is loaded by the container's `docker-entrypoint.sh`, which runs
+  `emdash seed` from `seed/seed.json` **only when the database doesn't exist yet** (a
+  fresh volume). Existing data is never touched, so redeploys are safe.
+
+So a first Dokploy deploy on an empty volume comes up already populated. To seed or
+re-seed manually (e.g. running outside Docker), run the CLI against the data directory:
 
 ```bash
 pnpm exec emdash seed --database data/emdash.db --uploads-dir data/uploads
 ```
 
-After the database exists, the running server picks up content immediately. Subsequent
-content edits happen through the admin panel and require no redeploy.
+Content edits then happen through the admin panel and require no redeploy. The first
+visit to `/_emdash/admin` prompts you to create the owner account.
 
 ## CI
 

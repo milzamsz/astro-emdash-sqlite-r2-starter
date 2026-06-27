@@ -1,6 +1,6 @@
 # Site Settings
 # Edit this file in Git.
-name: "Astro Cloudflare"
+name: "Astro EmDash"
 description: "Marketing, blog, and docs starter — multilanguage-ready."
 url: "https://astro-cloudflare.pages.dev"
 defaultLocale: en

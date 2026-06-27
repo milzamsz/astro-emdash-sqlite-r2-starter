@@ -8,7 +8,7 @@ test.describe("navigation chrome", () => {
     // Positive proof we're on this site, not a colliding dev server on 4321
     await expect(page.locator(".logo").first()).toHaveAttribute(
       "aria-label",
-      "Astro Cloudflare",
+      "Astro EmDash",
       { timeout: 30_000 },
     );
     await expect(page.locator(".header__list a").first()).toBeVisible({

@@ -42,7 +42,7 @@ export const footerNav = {
   /** Social media and contact links */
   social: [
     {
-      href: "https://github.com/your-org/astro-cloudflare",
+      href: "https://github.com/milzamsz/astro-emdash-sqlite-r2-starter",
       labelKey: "footer.github",
     },
     { href: "https://twitter.com/yourhandle", labelKey: "footer.twitter" },
