@@ -36,8 +36,25 @@ Set these in your Dokploy service's **Environment** settings.
 | `S3_SECRET_ACCESS_KEY` | for R2 | R2 secret key (secret) |
 | `S3_REGION` | no | `auto` for R2 |
 | `S3_PUBLIC_URL` | no | Public CDN/custom domain serving media |
+| `RESEND_API_KEY` | for email | Resend API key; presence registers the email provider (secret) |
+| `EMAIL_FROM` | for email | Verified sender, e.g. `My Site <noreply@example.com>` |
 
-Store the `S3_*` keys as encrypted secrets, never in the repo.
+Store the `S3_*` and `RESEND_API_KEY` values as encrypted secrets, never in the repo.
+
+## Email (Resend)
+
+EmDash needs an email provider to send magic-link logins, team invites, account
+recovery, and notifications. This starter ships a small HTTP-based Resend provider
+(`src/emdash/resend-email.ts`).
+
+Set `RESEND_API_KEY` and `EMAIL_FROM` in production. When the key is present the
+provider is registered, and because it is the only email provider EmDash selects it
+automatically — no admin-dashboard configuration is required. Create a key and verify
+your sending domain at [resend.com](https://resend.com). Leave `RESEND_API_KEY` empty
+to fall back to copy-link invites.
+
+> The first owner account is still created with a passkey over HTTPS. Email is needed
+> for inviting additional users and for magic-link logins thereafter.
 
 ## Secrets Validation
 

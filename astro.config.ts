@@ -10,6 +10,7 @@ import emdash, { local, s3 } from "emdash/astro";
 import { sqlite } from "emdash/db";
 import { readdir, readFile } from "node:fs/promises";
 import { join, extname, basename } from "node:path";
+import { fileURLToPath } from "node:url";
 import { siteConfig } from "./src/config/site.config";
 
 // Database: SQLite everywhere. Locally this is a file in ./data; on Dokploy the
@@ -31,6 +32,25 @@ const emdashStorage = process.env.S3_BUCKET
       directory: "./data/uploads",
       baseUrl: "/_emdash/api/media/file",
     });
+
+// Email provider: register the Resend transport only when an API key is
+// present. EmDash auto-selects the sole email provider, so production deploys
+// with RESEND_API_KEY set can send magic links, invites, and notifications.
+// Without it, EmDash falls back to copy-link invites (and the dev console).
+const resendPluginEntry = fileURLToPath(
+  new URL("./src/emdash/resend-email.ts", import.meta.url),
+).replace(/\\/g, "/");
+
+const emdashPlugins = process.env.RESEND_API_KEY
+  ? [
+      {
+        id: "resend-email",
+        version: "1.0.0",
+        capabilities: ["hooks.email-transport:register"],
+        entrypoint: resendPluginEntry,
+      },
+    ]
+  : [];
 
 async function collectFiles(dir: string, extensions: string[]): Promise<string[]> {
   const results: string[] = [];
@@ -144,6 +164,7 @@ export default defineConfig({
     emdash({
       database: sqlite({ url: databaseUrl }),
       storage: emdashStorage,
+      plugins: emdashPlugins,
     }),
     starlight({
       title: siteConfig.name,
