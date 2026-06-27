@@ -54,6 +54,30 @@ const emdashPlugins = [
   },
 ];
 
+// EmDash sets a strict `connect-src 'self'` CSP on /_emdash routes (prod only)
+// with no allowlist option. That blocks the browser from PUTting media to the
+// presigned Cloudflare R2 URL, so uploads stay stuck "pending". This integration
+// registers an outermost (`order: "pre"`, declared before emdash() below) middleware
+// that appends the R2 origin (from S3_ENDPOINT) to connect-src at runtime.
+const emdashCspEntry = fileURLToPath(
+  new URL("./src/middleware/emdash-csp.ts", import.meta.url),
+).replace(/\\/g, "/");
+
+function emdashCspIntegration() {
+  return {
+    name: "emdash-csp-connect-src",
+    hooks: {
+      "astro:config:setup": ({
+        addMiddleware,
+      }: {
+        addMiddleware: (params: { entrypoint: string; order: "pre" | "post" }) => void;
+      }) => {
+        addMiddleware({ entrypoint: emdashCspEntry, order: "pre" });
+      },
+    },
+  };
+}
+
 async function collectFiles(dir: string, extensions: string[]): Promise<string[]> {
   const results: string[] = [];
   const entries = await readdir(dir, { withFileTypes: true });
@@ -163,6 +187,9 @@ export default defineConfig({
     defaultStrategy: "hover",
   },
   integrations: [
+    // Registered first so its `pre` middleware is the outermost in the chain and
+    // runs its post-next() CSP patch AFTER EmDash's auth middleware sets the CSP.
+    emdashCspIntegration(),
     emdash({
       database: sqlite({ url: databaseUrl }),
       storage: emdashStorage,
