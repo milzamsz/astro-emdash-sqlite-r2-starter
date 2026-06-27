@@ -34,6 +34,8 @@ COPY --from=build /app/dist ./dist
 COPY --from=build /app/seed ./seed
 COPY package.json ./
 COPY docker-entrypoint.sh ./
+# Maintenance scripts (e.g. `pnpm set-site-url`) run inside the container.
+COPY scripts ./scripts
 RUN chmod +x ./docker-entrypoint.sh
 
 RUN mkdir -p /app/data

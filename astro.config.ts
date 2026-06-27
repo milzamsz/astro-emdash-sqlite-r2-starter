@@ -17,17 +17,18 @@ import { siteConfig } from "./src/config/site.config";
 // same path is backed by a persistent volume. Override with DATABASE_URL.
 const databaseUrl = process.env.DATABASE_URL ?? "file:./data/emdash.db";
 
-// Media storage: use Cloudflare R2 (S3-compatible API) when configured,
-// otherwise fall back to the local filesystem for development.
-const emdashStorage = process.env.S3_BUCKET
-  ? s3({
-      endpoint: process.env.S3_ENDPOINT,
-      bucket: process.env.S3_BUCKET,
-      accessKeyId: process.env.S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-      region: process.env.S3_REGION ?? "auto",
-      publicUrl: process.env.S3_PUBLIC_URL,
-    })
+// Media storage: in production (the Docker/Dokploy image build sets
+// NODE_ENV=production) use S3-compatible storage for Cloudflare R2. `s3()`
+// resolves every S3_* value from the environment WHEN THE CONTAINER STARTS
+// (S3_ENDPOINT, S3_BUCKET, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY, S3_REGION,
+// S3_PUBLIC_URL), so credentials must NOT be read here — astro.config runs at
+// build time, where runtime env vars are absent (reading them here is exactly
+// why media previously fell back to local). In local dev it uses the
+// filesystem unless S3_BUCKET is present in the shell environment.
+const useS3 =
+  process.env.NODE_ENV === "production" || Boolean(process.env.S3_BUCKET);
+const emdashStorage = useS3
+  ? s3()
   : local({
       directory: "./data/uploads",
       baseUrl: "/_emdash/api/media/file",
