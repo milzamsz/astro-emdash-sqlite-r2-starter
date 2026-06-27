@@ -33,24 +33,25 @@ const emdashStorage = process.env.S3_BUCKET
       baseUrl: "/_emdash/api/media/file",
     });
 
-// Email provider: register the Resend transport only when an API key is
-// present. EmDash auto-selects the sole email provider, so production deploys
-// with RESEND_API_KEY set can send magic links, invites, and notifications.
-// Without it, EmDash falls back to copy-link invites (and the dev console).
+// Email provider: always compile the Resend transport into the build. Whether
+// it actually registers the email:deliver hook is decided at runtime inside the
+// plugin based on RESEND_API_KEY / EMAIL_FROM (see src/emdash/resend-email.ts) —
+// this must NOT be gated here, because astro.config runs at build time (in the
+// Docker image build) where runtime env vars are not yet present. When the env
+// is set, EmDash auto-selects the sole provider; otherwise it falls back to
+// copy-link invites (and the dev console in `astro dev`).
 const resendPluginEntry = fileURLToPath(
   new URL("./src/emdash/resend-email.ts", import.meta.url),
 ).replace(/\\/g, "/");
 
-const emdashPlugins = process.env.RESEND_API_KEY
-  ? [
-      {
-        id: "resend-email",
-        version: "1.0.0",
-        capabilities: ["hooks.email-transport:register"],
-        entrypoint: resendPluginEntry,
-      },
-    ]
-  : [];
+const emdashPlugins = [
+  {
+    id: "resend-email",
+    version: "1.0.0",
+    capabilities: ["hooks.email-transport:register"],
+    entrypoint: resendPluginEntry,
+  },
+];
 
 async function collectFiles(dir: string, extensions: string[]): Promise<string[]> {
   const results: string[] = [];
