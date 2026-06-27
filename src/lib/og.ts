@@ -55,7 +55,7 @@ export async function renderOGImage(svg: string) {
 
 export async function buildOGResponse(svg: string) {
   const png = await renderOGImage(svg);
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": "public, max-age=31536000, immutable",
