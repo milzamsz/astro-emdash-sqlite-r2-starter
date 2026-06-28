@@ -35,6 +35,41 @@ same-origin and `S3_PUBLIC_URL` is not needed. See
 [Environment Variables → Media storage](/docs/deployment/environment-variables/) for the
 exact CORS policy and details.
 
+## Enable compression (gzip / Brotli)
+
+The Astro Node adapter serves HTML, CSS, and JS **uncompressed** — it has no built-in
+compression. On its own that drags Lighthouse Performance down (a ~53 KB stylesheet ships
+in full, inflating FCP/LCP) even though the server is fast. Compress at the **Traefik**
+reverse proxy that Dokploy already runs.
+
+In Dokploy: open the application → **Advanced → Traefik** and add a `compress` middleware,
+then attach it to the app's router. The dynamic config looks like:
+
+```yaml
+http:
+  middlewares:
+    site-compress:
+      compress:
+        # Don't compress Server-Sent Events — EmDash's live preview uses them.
+        excludedContentTypes:
+          - text/event-stream
+  routers:
+    # Add the middleware to the existing router Dokploy generated for this app:
+    <existing-router-name>:
+      middlewares:
+        - site-compress
+```
+
+After saving, verify with `curl -sI -H "Accept-Encoding: br,gzip" https://your-domain/`
+— the response should include `content-encoding: br` (or `gzip`). This typically takes
+Lighthouse Performance from ~90 to ~100, since the render-blocking CSS and JS now transfer
+at a fraction of their size.
+
+> The public marketing pages ship almost no JavaScript (the interactive bits are plain
+> Astro + tiny inline scripts), so compression is the main remaining lever. The heavy
+> React bundles you may see under `/_astro` belong to the EmDash admin and only load on
+> `/_emdash` routes.
+
 ## Database, migrations & seeding
 
 The SQLite database is runtime state and is not committed to git - it lives on the
