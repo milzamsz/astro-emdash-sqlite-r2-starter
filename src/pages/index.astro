@@ -26,11 +26,11 @@ const tabs = [
     icon: "zap",
     heading: "Performance",
     description:
-      "A lightweight, static-first stack that ships minimal JavaScript and renders from Cloudflare's edge network.",
+      "A server-rendered Astro stack that ships almost no JavaScript — public pages run zero React for fast, stable loads.",
     points: [
-      "Static-first rendering by default",
-      "Zero-JS islands architecture",
-      "Edge delivery with smart caching",
+      "Server-rendered via the Node adapter",
+      "Near-zero client JS on public pages",
+      "Fast TTFB and strong Core Web Vitals",
     ],
     visual: "$ docker build -t site .\n✓ 25 pages built in 6.4s\n→ Self-hosted, no lock-in",
   },
@@ -39,14 +39,14 @@ const tabs = [
     icon: "pen-line",
     heading: "Content",
     description:
-      "Author in Markdown with a Git-based workflow. Blog, docs, and services are type-safe content collections.",
+      "Author the blog and pages in the EmDash CMS — a database-backed admin with structured fields and rich text. Edits go live with no redeploy.",
     points: [
-      "Type-safe Markdown collections",
-      "Versioned and reviewed in Git",
-      "Blog, docs, and service pages",
+      "EmDash admin with typed fields",
+      "Portable Text rich content",
+      "Stored in SQLite, media on R2",
     ],
     visual:
-      "src/content/\n├─ blog/\n├─ docs/\n├─ services/\n└─ pages/",
+      "/_emdash/admin\n├─ posts/\n├─ pages/\n└─ media/",
   },
   {
     id: "growth",
@@ -103,7 +103,7 @@ const tabs = [
     <Credibility
       stats={[
         { value: "55+", label: "Pages" },
-        { value: "100%", label: "Static-first" },
+        { value: "~2 KB", label: "Home page JS" },
         { value: "A11y", label: "WCAG AA" },
       ]}
       logos={[
@@ -146,7 +146,7 @@ const tabs = [
       {
         question: "How do I manage content?",
         answer:
-          "Content lives in Markdown collections (blog, docs, services, pages) that are versioned and reviewed in Git.",
+          "The blog and pages are authored in the EmDash admin panel and stored in SQLite, so edits go live with no redeploy. Docs and services stay as Markdown in the repo.",
       },
     ]}
   />

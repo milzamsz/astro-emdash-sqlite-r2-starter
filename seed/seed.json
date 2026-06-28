@@ -3,7 +3,7 @@
   "version": "1",
   "meta": {
     "name": "Astro + EmDash Starter",
-    "description": "Marketing + blog starter seeded from the Astro Cloudflare template."
+    "description": "Marketing + blog starter for the Astro + EmDash template (SQLite, Docker, Cloudflare R2)."
   },
   "settings": {
     "title": "Astro EmDash Starter",

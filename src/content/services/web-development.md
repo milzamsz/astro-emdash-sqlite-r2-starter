@@ -4,18 +4,18 @@ slug: web-development
 title: Web Development
 description: Modern website development with high performance, accessibility, and SEO-friendliness.
 features:
-  - "SSG/SSR with Astro framework"
+  - "Server-rendered Astro framework"
   - "Tailwind CSS + design tokens"
   - "WCAG 2.1 AA accessibility"
-  - "Headless CMS integration"
+  - "EmDash CMS integration"
 priceRange: $500 - $3,000
 order: 1
 translationKey: web-development
 ---
 
 We build modern websites that are fast by default and easy to maintain. Every
-project ships static-first, with accessibility and SEO treated as requirements
-rather than afterthoughts.
+project ships server-rendered with minimal JavaScript, and treats accessibility
+and SEO as requirements rather than afterthoughts.
 
 ## What's included
 
