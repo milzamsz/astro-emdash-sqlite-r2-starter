@@ -62,8 +62,14 @@ Set these in production (Dokploy → service → Environment). See `.env.example
 | `S3_SECRET_ACCESS_KEY` | for R2 | R2 secret key (secret) |
 | `S3_REGION` | no | `auto` for R2 |
 | `S3_PUBLIC_URL` | no | Inert — media is served via EmDash's proxy route; leave empty |
+| `RESEND_API_KEY` | no | Enables magic-link sign-in / invites via Resend (auto-selected when set) |
+| `EMAIL_FROM` | with Resend | Verified sender, e.g. `Acme <noreply@your-domain>` |
 
 If `S3_BUCKET` is empty, EmDash falls back to local filesystem storage under `./data/uploads`.
+
+If `RESEND_API_KEY` is unset, EmDash uses copy-link invites instead of sending email.
+When changing the public URL, also update the value stored in the database (used to build
+outbound email links): `pnpm set-site-url https://your-domain`.
 
 Uploads `PUT` directly to R2 from the browser, so the bucket needs a CORS policy
 allowing your site origin (`GET`, `PUT`, `HEAD`). The bucket can stay private: EmDash
@@ -82,6 +88,15 @@ The repo ships a multi-stage `Dockerfile` that builds the standalone Node server
 4. Set environment variables (`SITE_URL`, the `S3_*` R2 credentials, optional analytics).
 5. Expose port `4321` and point your domain at the service.
 6. Deploy. On first boot, run migrations/seed once (see below).
+7. Enable compression at the proxy (see below) for best Lighthouse performance.
+
+### Compression (gzip / Brotli)
+
+The Astro Node adapter serves HTML/CSS/JS **uncompressed**. Compress at the **Traefik**
+reverse proxy Dokploy runs: add a `compress` middleware (excluding `text/event-stream` so
+EmDash live preview keeps working) and attach it to the app's router. Verify with
+`curl -sI -H "Accept-Encoding: br,gzip" https://your-domain | grep -i content-encoding`.
+Full config is in `/docs/deployment/dokploy`.
 
 ### Cloudflare R2
 
@@ -111,6 +126,15 @@ pnpm exec emdash seed --database data/emdash.db --uploads-dir data/uploads
 
 Content edits then happen through the admin panel and require no redeploy. The first
 visit to `/_emdash/admin` prompts you to create the owner account.
+
+**Changing the schema** (editing collections/fields in `seed/seed.json`) only affects a
+fresh database — the entrypoint never re-seeds an existing one. To apply schema changes to
+a live deployment, either:
+
+- delete `emdash.db*` on the `/app/data` volume and redeploy (re-seeds from scratch; R2
+  media is unaffected), or
+- run a targeted migration. For example, after adding `urlPattern` to collections in an
+  older database, run `pnpm set-url-patterns` and restart.
 
 ## CI
 

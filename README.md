@@ -5,10 +5,13 @@ A production-ready marketing + blog + docs site built with **Astro 7** and the *
 ## Features
 
 - EmDash CMS as the single source of truth for the blog and pages (Portable Text rich content)
+- Pages use **typed fields** (hero, a `features` repeater, CTA) instead of hand-written JSON
 - English-first with a multilanguage-ready i18n engine (prefix-based routing)
 - Marketing pages, blog, and Starlight-powered docs with full-text search
+- Minimal client JS: interactive bits are plain Astro + tiny inline scripts (no React on public pages)
 - Light/dark theming with a monochrome OKLCH design system
 - SEO defaults: canonical, hreflang, JSON-LD, Open Graph, sitemap, RSS, dynamic `llms.txt`
+- Optional magic-link sign-in via [Resend](https://resend.com) (set `RESEND_API_KEY`)
 - Server-rendered via the Astro Node adapter — runs anywhere Node + a volume is available
 - SQLite database (local file or persistent volume) + Cloudflare R2 media via the S3 API
 
@@ -64,6 +67,10 @@ pnpm export-seed # export current CMS content back to a seed file
 pnpm lint        # eslint + stylelint + type-check + validations
 pnpm test        # unit tests (vitest)
 pnpm test:e2e    # end-to-end tests (playwright)
+
+# Maintenance (operate on an existing database)
+pnpm set-site-url https://your-domain   # set the stored emdash:site_url (email links)
+pnpm set-url-patterns                    # apply collection urlPattern values to an old DB
 ```
 
 ## Content model
@@ -74,6 +81,13 @@ records into the types the Astro components already expect, and renders rich con
 with `<PortableText>`. Collection schemas and starter content are defined in
 `seed/seed.json`.
 
+Pages are built from **typed fields** — `hero_title`/`hero_subtitle`, a `features`
+repeater (rows of title/description/icon), and `cta_*` fields — so editors get real
+inputs in the admin instead of a JSON box. Each collection also declares a `urlPattern`
+(`/{slug}` for pages, `/blog/{slug}` for posts) that drives the admin's "View on site"
+link and sitemaps. Media is uploaded to R2 and served through EmDash's same-origin proxy
+route, so the bucket can stay private. See the in-app docs at `/docs/guides/content-management`.
+
 Other content (docs, services, stack, settings) still lives in `src/content` as
 Markdown/JSON, type-checked via content collection schemas.
 
@@ -81,7 +95,9 @@ Markdown/JSON, type-checked via content collection schemas.
 
 Server-rendered Astro on a Node host. The included `Dockerfile` builds a standalone
 server; deploy it to **Dokploy** with a persistent volume mounted at `/app/data` and R2
-credentials set as environment variables. See [SETUP.md](SETUP.md).
+credentials set as environment variables. The Node adapter serves assets uncompressed, so
+enable **gzip/Brotli at the Traefik proxy** for best Lighthouse scores. See
+[SETUP.md](SETUP.md) and `/docs/deployment/dokploy`.
 
 ## License
 
