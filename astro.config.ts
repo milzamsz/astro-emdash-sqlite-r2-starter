@@ -288,6 +288,13 @@ export default defineConfig({
   },
   build: {
     format: "directory",
+    // Inline all CSS into the document instead of emitting render-blocking
+    // <link rel="stylesheet"> tags. Lighthouse flagged ~350ms of render-blocking
+    // CSS (BaseLayout ~53KB + ui + index); inlining removes those blocking
+    // round-trips so FCP/Speed-Index improve. The inlined CSS is part of the
+    // HTML response, which Traefik gzip/Brotli-compresses (see Dokploy docs), so
+    // the first-paint payload stays small.
+    inlineStylesheets: "always",
   },
   markdown: {
     shikiConfig: {
