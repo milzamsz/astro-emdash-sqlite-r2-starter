@@ -32,7 +32,7 @@ const tabs = [
       "Zero-JS islands architecture",
       "Edge delivery with smart caching",
     ],
-    visual: "$ npm run build\n✓ 25 pages built in 6.4s\n→ Deployed to the edge",
+    visual: "$ docker build -t site .\n✓ 25 pages built in 6.4s\n→ Self-hosted, no lock-in",
   },
   {
     id: "content",
@@ -141,7 +141,7 @@ const tabs = [
       {
         question: "Where does it deploy?",
         answer:
-          "It's built for Cloudflare Pages with optional R2 media storage, but the static output runs on any modern host.",
+          "It ships as a Docker image you can self-host anywhere (Dokploy, a VPS, any container host), with Cloudflare R2 for media in production.",
       },
       {
         question: "How do I manage content?",

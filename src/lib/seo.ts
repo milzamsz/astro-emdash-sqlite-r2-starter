@@ -79,7 +79,7 @@ export function ogMeta(meta: SeoMeta) {
   };
 
   if (imageUrl) {
-    // For CloudFlare Pages, og:image is the transformed URL from the R2 bucket.
+    // og:image is the absolute URL of the generated/served image.
     // og:image:secure_url = same as og:url (canonical) when accessible over HTTPS.
     // og:image:width/height come from the preset.
     base["og:image"] = imageUrl;

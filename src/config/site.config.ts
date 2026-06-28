@@ -94,7 +94,7 @@ export const siteConfig: SiteConfig = {
   url: "https://astro-cloudflare.pages.dev",
   name: "Astro EmDash",
   description:
-    "Marketing, blog, and docs starter built with Astro and Cloudflare Pages — multilanguage-ready",
+    "Marketing, blog, and docs starter built with Astro and the EmDash CMS, self-hosted with Docker — multilanguage-ready",
   author: "Your Name",
   email: "your.email@example.com",
   authorImage: "/images/author.jpg",

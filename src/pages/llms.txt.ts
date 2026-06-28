@@ -22,7 +22,8 @@ const corePages: LlmLink[] = [
 const stack: LlmLink[] = [
   { label: "Astro", path: "https://astro.build", description: "Static site generator for fast content sites." },
   { label: "Starlight", path: "https://starlight.astro.build", description: "Documentation framework for Astro." },
-  { label: "Cloudflare Pages", path: "https://pages.cloudflare.com", description: "Edge deployment with optional R2 storage." },
+  { label: "EmDash", path: "https://github.com/emdash-cms/emdash", description: "Git-friendly CMS for the blog and pages." },
+  { label: "Docker", path: "https://www.docker.com", description: "Containerized self-hosting, with Cloudflare R2 for media." },
 ];
 
 export const GET: APIRoute = () => {

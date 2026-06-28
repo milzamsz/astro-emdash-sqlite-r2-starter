@@ -1,28 +1,28 @@
 ---
 locale: en
 slug: cloud-deployment
-title: Cloud Deployment
-description: Deploy websites to Cloudflare Pages, Workers, and the global edge network.
+title: Docker Deployment
+description: Containerize and self-host your site with Docker on any modern host.
 features:
-  - "Cloudflare Pages deployment"
-  - "Workers & Functions"
-  - "Edge caching & performance"
-  - "Automatic SSL/TLS"
+  - "Docker image & CI build"
+  - "Persistent volumes & databases"
+  - "Reverse proxy + automatic SSL/TLS"
+  - "Zero-downtime redeploys"
 priceRange: $250 - $1,500
 order: 2
 translationKey: cloud-deployment
 ---
 
-We deploy your site to Cloudflare's global edge network so it loads quickly
-everywhere, scales automatically, and stays online without server maintenance.
+We containerize your site with Docker and deploy it to the host of your choice, so
+it runs anywhere Node and a persistent volume are available — no vendor lock-in.
 
 ## What's included
 
-Production deployment to Cloudflare Pages with Workers and Functions for dynamic
-needs, edge caching, and automatic SSL/TLS on every domain.
+A multi-stage Docker build for a standalone server, persistent volumes for the
+database and uploads, a reverse proxy with automatic SSL/TLS, and a repeatable
+deploy pipeline that keeps your content safe across redeploys.
 
-## Why the edge
+## Why Docker
 
-Static assets are served from data centers close to your visitors, while
-serverless functions handle the dynamic parts — giving you speed and
-reliability without managing infrastructure.
+A single image runs identically in local dev, staging, and production. You keep full
+control of your data and infrastructure, and can move between hosts without rewrites.
