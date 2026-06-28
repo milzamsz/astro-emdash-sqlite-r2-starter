@@ -61,9 +61,14 @@ Set these in production (Dokploy → service → Environment). See `.env.example
 | `S3_ACCESS_KEY_ID` | for R2 | R2 access key (secret) |
 | `S3_SECRET_ACCESS_KEY` | for R2 | R2 secret key (secret) |
 | `S3_REGION` | no | `auto` for R2 |
-| `S3_PUBLIC_URL` | no | Public CDN/custom domain serving media |
+| `S3_PUBLIC_URL` | no | Inert — media is served via EmDash's proxy route; leave empty |
 
 If `S3_BUCKET` is empty, EmDash falls back to local filesystem storage under `./data/uploads`.
+
+Uploads `PUT` directly to R2 from the browser, so the bucket needs a CORS policy
+allowing your site origin (`GET`, `PUT`, `HEAD`). The bucket can stay private: EmDash
+serves media through its own proxy route (`/_emdash/api/media/file/<key>`) that streams
+objects from R2, so the admin always shows that path even though the file lives in R2.
 
 ## Deploy to Dokploy (Docker)
 
@@ -81,8 +86,10 @@ The repo ships a multi-stage `Dockerfile` that builds the standalone Node server
 ### Cloudflare R2
 
 Create an R2 bucket and an S3 API token (Access Key ID + Secret). Set `S3_ENDPOINT`,
-`S3_BUCKET`, `S3_ACCESS_KEY_ID`, and `S3_SECRET_ACCESS_KEY`. Optionally connect a custom
-domain to the bucket and set `S3_PUBLIC_URL` so media is served from your CDN domain.
+`S3_BUCKET`, `S3_ACCESS_KEY_ID`, and `S3_SECRET_ACCESS_KEY`, and add a CORS policy on the
+bucket allowing your site origin (`GET`, `PUT`, `HEAD`) for browser uploads. The bucket
+can stay private — media is delivered through EmDash's same-origin proxy route, so
+`S3_PUBLIC_URL` is not required.
 
 ### Database, migrations & seeding
 

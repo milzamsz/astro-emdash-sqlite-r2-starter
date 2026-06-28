@@ -35,7 +35,7 @@ Set these in your Dokploy service's **Environment** settings.
 | `S3_ACCESS_KEY_ID` | yes | R2 access key (secret) |
 | `S3_SECRET_ACCESS_KEY` | yes | R2 secret key (secret) |
 | `S3_REGION` | no | Defaults to `auto` (R2) |
-| `S3_PUBLIC_URL` | no | Public bucket/CDN domain serving media |
+| `S3_PUBLIC_URL` | no | Inert in this template — media is served through EmDash's proxy route (see below). Safe to leave empty |
 | `RESEND_API_KEY` | for email | Resend API key; presence registers the email provider (secret) |
 | `EMAIL_FROM` | for email | Verified sender, e.g. `My Site <noreply@example.com>` |
 
@@ -51,8 +51,49 @@ required at runtime in production — without them, uploads fail with
 `MISSING_S3_CONFIG`. Local dev uses the filesystem (`./data/uploads`) unless
 `S3_BUCKET` is set in your shell.
 
-Note: switching to R2 does not migrate files already uploaded to the local volume —
-re-upload any earlier assets so they get R2 URLs.
+### How uploads work
+
+Uploads use **presigned URLs**: the admin asks the server for a signed URL, then the
+browser `PUT`s the file **directly to R2**. Two things must be in place for that
+cross-origin `PUT` to succeed:
+
+1. **R2 bucket CORS** — allow your site origin. Example policy:
+
+   ```json
+   [
+     {
+       "AllowedOrigins": ["https://your-domain.example"],
+       "AllowedMethods": ["GET", "PUT", "HEAD"],
+       "AllowedHeaders": ["*"],
+       "ExposeHeaders": ["ETag"],
+       "MaxAgeSeconds": 3600
+     }
+   ]
+   ```
+
+2. **CSP allowlist** — EmDash sets a strict `connect-src 'self'` CSP on `/_emdash`
+   routes in production, which would otherwise block the browser from connecting to
+   R2. This template ships `src/middleware/emdash-csp.ts` (registered before the
+   EmDash integration in `astro.config.ts`) that appends the `S3_ENDPOINT` origin to
+   `connect-src` so the upload can proceed. No configuration needed beyond setting
+   `S3_ENDPOINT`.
+
+### How media is served (and why URLs look like `/_emdash/...`)
+
+EmDash serves **all** media through its own same-origin proxy route
+(`/_emdash/api/media/file/<key>`), which streams the object out of R2. The admin Media
+Library and rendered pages always show this proxy path — that is the *delivery* URL,
+not the *storage* location. The file is in R2 regardless (verify in the Cloudflare R2
+dashboard → your bucket → Objects).
+
+This is intentional and preferable: the bucket stays **private**, media is served
+through your own Cloudflare-fronted domain, and every file gets a sandbox CSP +
+safe `Content-Disposition` (stored-XSS protection). Because of this, `S3_PUBLIC_URL`
+has no effect on what you see and can be left empty. The R2 bucket does **not** need
+public access enabled for delivery to work; you can disable the public `r2.dev` URL.
+
+Note: switching storage backends does not migrate files already uploaded to a previous
+backend — re-upload any earlier assets.
 
 ## Email (Resend)
 

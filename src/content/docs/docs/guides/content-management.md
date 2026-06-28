@@ -49,5 +49,7 @@ EmDash content carries its own locale field. See the
 
 ## Media
 
-Editor uploads go to Cloudflare R2 in production (local filesystem in dev). Images can
-also live in `src/assets` to be optimized by Astro at build time.
+Editor uploads go to Cloudflare R2 in production (local filesystem in dev). EmDash
+serves them through a same-origin proxy route (`/_emdash/api/media/file/<key>`), so the
+admin shows that path even though the file lives in R2 — this keeps the bucket private.
+Images can also live in `src/assets` to be optimized by Astro at build time.

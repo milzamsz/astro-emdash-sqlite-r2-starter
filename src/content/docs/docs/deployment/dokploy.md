@@ -24,9 +24,16 @@ multi-stage `Dockerfile` that builds a standalone server (`dist/server/entry.mjs
 
 In production, media is stored in Cloudflare R2 through its S3-compatible API. Create
 an R2 bucket and an S3 API token, then set `S3_ENDPOINT`, `S3_BUCKET`,
-`S3_ACCESS_KEY_ID`, and `S3_SECRET_ACCESS_KEY`. Optionally attach a custom domain to the
-bucket and set `S3_PUBLIC_URL` so assets serve from your CDN domain. If `S3_BUCKET` is
-unset, EmDash falls back to local filesystem storage under `./data/uploads`.
+`S3_ACCESS_KEY_ID`, and `S3_SECRET_ACCESS_KEY`. If `S3_BUCKET` is unset, EmDash falls
+back to local filesystem storage under `./data/uploads`.
+
+Uploads `PUT` directly to R2 from the browser via presigned URLs, so the bucket needs a
+**CORS policy** allowing your site origin (`GET`, `PUT`, `HEAD`). The bucket can stay
+**private** — EmDash serves media through its own proxy route
+(`/_emdash/api/media/file/<key>`) that streams objects from R2, so URLs always look
+same-origin and `S3_PUBLIC_URL` is not needed. See
+[Environment Variables → Media storage](/docs/deployment/environment-variables/) for the
+exact CORS policy and details.
 
 ## Database, migrations & seeding
 
