@@ -5,7 +5,7 @@ import { t } from "../i18n/ui";
 import { siteConfig } from "../config/site.config";
 import Hero from "../components/Hero.astro";
 import { Button, Icon } from "../components/ui/index";
-import { getPage, type PageSection } from "../lib/cms";
+import { getPage } from "../lib/cms";
 
 const locale = (Astro.currentLocale || "en") as "en";
 
@@ -31,22 +31,23 @@ const contactEmail = settings?.orgEmail || siteConfig.email;
 const mapEmbed = `https://maps.google.com/maps?q=${lat}%2C${lng}&z=15&hl=en&output=embed`;
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`;
 
-const sections: PageSection[] = page?.data.sections || [];
-const heroSection = sections.find((s) => s.type === "hero");
-const featuresSection = sections.find((s) => s.type === "features");
+const hero = page?.data.hero;
 
 const iconByTitle: Record<string, string> = {
-  Email: "lucide:mail",
-  Office: "lucide:map-pin",
-  Social: "lucide:at-sign",
-  Phone: "lucide:phone",
+  Email: "mail",
+  Office: "map-pin",
+  Social: "at-sign",
+  Phone: "phone",
 };
 
-const methods = (featuresSection?.items || []).map((item) => ({
-  title: item.title || "",
-  description: item.description || "",
-  icon: iconByTitle[item.title || ""] || "lucide:circle",
-}));
+const methods = (page?.data.features ?? []).map((item) => {
+  const icon = item.icon || iconByTitle[item.title] || "circle";
+  return {
+    title: item.title,
+    description: item.description,
+    icon: icon.startsWith("lucide:") ? icon : `lucide:${icon}`,
+  };
+});
 ---
 
 <BaseLayout
@@ -56,13 +57,13 @@ const methods = (featuresSection?.items || []).map((item) => ({
   path={"/contact"}
 >
   {
-    heroSection && (
+    hero && (
       <Hero
         variant="centered"
         size="md"
         eyebrow="Contact"
-        headline={heroSection.title || page?.data.title || ""}
-        subheadline={heroSection.content}
+        headline={hero.title || page?.data.title || ""}
+        subheadline={hero.subtitle}
         locale={locale}
       />
     )

@@ -41,7 +41,25 @@
       "fields": [
         { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
         { "slug": "description", "label": "Description", "type": "text" },
-        { "slug": "sections", "label": "Sections", "type": "json" },
+        { "slug": "hero_title", "label": "Hero title", "type": "string" },
+        { "slug": "hero_subtitle", "label": "Hero subtitle", "type": "text" },
+        { "slug": "features_title", "label": "Features section title", "type": "string" },
+        {
+          "slug": "features",
+          "label": "Features",
+          "type": "repeater",
+          "validation": {
+            "subFields": [
+              { "slug": "title", "label": "Title", "type": "string", "required": true },
+              { "slug": "description", "label": "Description", "type": "text" },
+              { "slug": "icon", "label": "Icon (lucide name, e.g. rocket)", "type": "string" }
+            ]
+          }
+        },
+        { "slug": "cta_title", "label": "CTA title", "type": "string" },
+        { "slug": "cta_text", "label": "CTA text", "type": "text" },
+        { "slug": "cta_button", "label": "CTA button label", "type": "string" },
+        { "slug": "cta_href", "label": "CTA link", "type": "url" },
         { "slug": "content", "label": "Content", "type": "portableText" },
         { "slug": "is_legal", "label": "Legal page", "type": "boolean" },
         { "slug": "order", "label": "Order", "type": "integer" }
@@ -209,30 +227,19 @@
           "description": "Meet the team and vision behind the modern marketing website starter.",
           "is_legal": false,
           "order": 1,
-          "sections": [
-            {
-              "type": "hero",
-              "title": "A foundation built for modern marketing sites",
-              "content": "This starter gives you a fast, accessible, and SEO-ready base — English-first and wired for more languages from day one."
-            },
-            {
-              "type": "features",
-              "title": "What we care about",
-              "items": [
-                { "title": "Developer Experience", "description": "Modern tooling, end-to-end type safety, and a layout you can actually navigate.", "icon": "code" },
-                { "title": "Performance First", "description": "Server-rendered and edge-ready, with strong Core Web Vitals out of the box.", "icon": "rocket" },
-                { "title": "Multilanguage Ready", "description": "An i18n engine and localized content, structured for global reach.", "icon": "globe" },
-                { "title": "CMS-Managed Content", "description": "Structured content in EmDash that is editable, versioned, and easy to own.", "icon": "git-branch" }
-              ]
-            },
-            {
-              "type": "cta",
-              "title": "Ready to build?",
-              "content": "Explore the services or browse the docs to get started.",
-              "ctaText": "View services",
-              "ctaHref": "/services"
-            }
-          ]
+          "hero_title": "A foundation built for modern marketing sites",
+          "hero_subtitle": "This starter gives you a fast, accessible, and SEO-ready base — English-first and wired for more languages from day one.",
+          "features_title": "What we care about",
+          "features": [
+            { "title": "Developer Experience", "description": "Modern tooling, end-to-end type safety, and a layout you can actually navigate.", "icon": "code" },
+            { "title": "Performance First", "description": "Server-rendered and edge-ready, with strong Core Web Vitals out of the box.", "icon": "rocket" },
+            { "title": "Multilanguage Ready", "description": "An i18n engine and localized content, structured for global reach.", "icon": "globe" },
+            { "title": "CMS-Managed Content", "description": "Structured content in EmDash that is editable, versioned, and easy to own.", "icon": "git-branch" }
+          ],
+          "cta_title": "Ready to build?",
+          "cta_text": "Explore the services or browse the docs to get started.",
+          "cta_button": "View services",
+          "cta_href": "/services"
         }
       },
       {
@@ -244,13 +251,8 @@
           "description": "Choose the plan that fits your marketing website needs.",
           "is_legal": false,
           "order": 3,
-          "sections": [
-            {
-              "type": "hero",
-              "title": "Simple, transparent pricing",
-              "content": "Start free and scale as you grow. No hidden fees, cancel anytime."
-            }
-          ]
+          "hero_title": "Simple, transparent pricing",
+          "hero_subtitle": "Start free and scale as you grow. No hidden fees, cancel anytime."
         }
       },
       {
@@ -262,21 +264,13 @@
           "description": "Get in touch with our team for questions, collaboration, and more information.",
           "is_legal": false,
           "order": 4,
-          "sections": [
-            {
-              "type": "hero",
-              "title": "Contact Us",
-              "content": "We'd love to hear from you."
-            },
-            {
-              "type": "features",
-              "title": "Ways to Reach Us",
-              "items": [
-                { "title": "Email", "description": "hello@example.com" },
-                { "title": "Office", "description": "Jakarta, Indonesia" },
-                { "title": "Social", "description": "@astroemdash" }
-              ]
-            }
+          "hero_title": "Contact Us",
+          "hero_subtitle": "We'd love to hear from you.",
+          "features_title": "Ways to Reach Us",
+          "features": [
+            { "title": "Email", "description": "hello@example.com", "icon": "mail" },
+            { "title": "Office", "description": "Jakarta, Indonesia", "icon": "map-pin" },
+            { "title": "Social", "description": "@astroemdash", "icon": "at-sign" }
           ]
         }
       },
@@ -289,9 +283,6 @@
           "description": "Privacy policy for this starter website.",
           "is_legal": true,
           "order": 5,
-          "sections": [
-            { "type": "hero", "title": "Privacy Policy", "content": "How we manage and protect your data." }
-          ],
           "content": [
             {
               "_type": "block",
@@ -340,9 +331,6 @@
           "description": "Terms and conditions for using this starter website.",
           "is_legal": true,
           "order": 6,
-          "sections": [
-            { "type": "hero", "title": "Terms & Conditions", "content": "The basic rules for using our website and services." }
-          ],
           "content": [
             {
               "_type": "block",

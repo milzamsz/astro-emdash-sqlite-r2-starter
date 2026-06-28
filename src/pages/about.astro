@@ -4,17 +4,16 @@ import { t } from "../i18n/ui";
 import Hero from "../components/Hero.astro";
 import FeatureGrid from "../components/FeatureGrid.astro";
 import CTA from "../components/CTA.astro";
-import { getPage, type PageSection } from "../lib/cms";
+import { getPage } from "../lib/cms";
 
 const locale = (Astro.currentLocale || "en") as "en";
 
 const page = await getPage("about");
 
-const sections: PageSection[] = page?.data.sections || [];
-const heroSection = sections.find((s) => s.type === "hero");
-const featuresSection = sections.find((s) => s.type === "features");
-const ctaSection = sections.find((s) => s.type === "cta");
-const featureItems = featuresSection?.items || [];
+const hero = page?.data.hero;
+const cta = page?.data.cta;
+const featureItems = page?.data.features ?? [];
+const featuresTitle = page?.data.featuresTitle;
 const featureColumns = featureItems.length % 2 === 0 ? 2 : 3;
 ---
 
@@ -25,37 +24,33 @@ const featureColumns = featureItems.length % 2 === 0 ? 2 : 3;
   path={"/about"}
 >
   {
-    heroSection && (
+    hero && (
       <Hero
         variant="centered"
         size="md"
         eyebrow="About"
-        title={heroSection.title || page?.data.title || ""}
-        content={heroSection.content}
+        title={hero.title || page?.data.title || ""}
+        content={hero.subtitle}
         locale={locale}
       />
     )
   }
   {
-    featuresSection && (
+    featureItems.length > 0 && (
       <FeatureGrid
-        title={featuresSection.title}
+        title={featuresTitle}
         columns={featureColumns}
-        features={featureItems.map((i) => ({
-          title: i.title || "",
-          description: i.description || "",
-          icon: i.icon,
-        }))}
+        features={featureItems}
       />
     )
   }
   {
-    ctaSection && (
+    cta && (
       <CTA
-        title={ctaSection.title || ""}
-        content={ctaSection.content}
-        ctaText={ctaSection.ctaText}
-        ctaHref={ctaSection.ctaHref}
+        title={cta.title || ""}
+        content={cta.text}
+        ctaText={cta.button}
+        ctaHref={cta.href}
         locale={locale}
       />
     )

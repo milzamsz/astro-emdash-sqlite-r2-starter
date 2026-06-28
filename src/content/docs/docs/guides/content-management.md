@@ -51,6 +51,28 @@ cd /app && pnpm set-url-patterns
 > ones wired to the `pages` collection. A page created in the admin with a different slug
 > needs a matching Astro route to render.
 
+### Page content fields
+
+Pages use **typed fields** so the admin shows real inputs instead of a raw JSON box. Each
+field maps to part of the rendered page:
+
+| Field | Type | Renders as |
+| --- | --- | --- |
+| `hero_title` / `hero_subtitle` | string / text | The page hero heading + subheading |
+| `features_title` | string | Heading above the features/contact-methods grid |
+| `features` | **repeater** (`title`, `description`, `icon`) | Feature/contact-method cards. `icon` is a [Lucide](https://lucide.dev) name (e.g. `rocket`, `mail`, `map-pin`) — the `lucide:` prefix is added automatically |
+| `cta_title` / `cta_text` / `cta_button` / `cta_href` | string / text / string / url | The closing call-to-action band (About) |
+| `content` | Portable Text | Rich body, used by the legal pages (Privacy, Terms) |
+
+The `features` field is a **repeater**: click *Add* to create a row, fill in title/description/icon,
+drag to reorder. This replaced the old single `sections` JSON field — no hand-written JSON.
+`src/lib/cms.ts` adapts these fields into the props each page component expects, so editing a
+field in the admin and saving updates the live page on next request.
+
+> Repeater sub-fields can't nest. The page model is intentionally flat: a single `features`
+> list plus scalar hero/CTA fields covers About, Contact, and Pricing. Add new scalar or
+> repeater fields in `seed/seed.json` and read them in `adaptPage` to extend it.
+
 ## File-based collections (Markdown/JSON)
 
 | Collection | Description | Files |

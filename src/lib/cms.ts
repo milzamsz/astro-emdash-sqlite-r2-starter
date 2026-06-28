@@ -134,13 +134,10 @@ export async function getPostEntry(slug: string): Promise<PostDetail | null> {
   };
 }
 
-export interface PageSection {
-  type: string;
-  title?: string;
-  content?: string;
-  ctaText?: string;
-  ctaHref?: string;
-  items?: { title?: string; description?: string; icon?: string }[];
+export interface CmsFeature {
+  title: string;
+  description: string;
+  icon?: string;
 }
 
 export interface CmsPage {
@@ -149,7 +146,10 @@ export interface CmsPage {
     slug: string;
     title: string;
     description?: string;
-    sections: PageSection[];
+    hero: { title?: string; subtitle?: string } | null;
+    featuresTitle?: string;
+    features: CmsFeature[];
+    cta: { title?: string; text?: string; button?: string; href?: string } | null;
     isLegal: boolean;
   };
   content: PortableBlock[];
@@ -157,13 +157,46 @@ export interface CmsPage {
 
 function adaptPage(entry: RawEntry): CmsPage {
   const d = entry.data ?? {};
+
+  const heroTitle = asString(d.hero_title);
+  const heroSubtitle = asString(d.hero_subtitle);
+  const hero =
+    heroTitle || heroSubtitle
+      ? { title: heroTitle || undefined, subtitle: heroSubtitle || undefined }
+      : null;
+
+  const features: CmsFeature[] = Array.isArray(d.features)
+    ? (d.features as Record<string, unknown>[]).map((f) => ({
+        title: asString(f.title),
+        description: asString(f.description),
+        icon: typeof f.icon === "string" && f.icon ? f.icon : undefined,
+      }))
+    : [];
+
+  const ctaTitle = asString(d.cta_title);
+  const ctaText = asString(d.cta_text);
+  const ctaButton = asString(d.cta_button);
+  const ctaHref = asString(d.cta_href);
+  const cta =
+    ctaTitle || ctaText || ctaButton || ctaHref
+      ? {
+          title: ctaTitle || undefined,
+          text: ctaText || undefined,
+          button: ctaButton || undefined,
+          href: ctaHref || undefined,
+        }
+      : null;
+
   return {
     id: entry.id,
     data: {
       slug: asString(d.slug, entry.id),
       title: asString(d.title),
       description: typeof d.description === "string" ? d.description : undefined,
-      sections: Array.isArray(d.sections) ? (d.sections as PageSection[]) : [],
+      hero,
+      featuresTitle: asString(d.features_title) || undefined,
+      features,
+      cta,
       isLegal: Boolean(d.is_legal),
     },
     content: asPortableBlocks(d.content),
