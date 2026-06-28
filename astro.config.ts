@@ -78,6 +78,29 @@ function emdashCspIntegration() {
   };
 }
 
+// Sends real security headers (CSP, HSTS, X-Frame-Options, …) on the public
+// site. The CSP auto-hashes inline scripts from the emitted HTML so it stays
+// strict without `'unsafe-inline'`; `/_emdash` is left to EmDash's own CSP.
+// Disable with DISABLE_SECURITY_HEADERS=1. See src/middleware/security-headers.ts.
+const securityHeadersEntry = fileURLToPath(
+  new URL("./src/middleware/security-headers.ts", import.meta.url),
+).replace(/\\/g, "/");
+
+function securityHeadersIntegration() {
+  return {
+    name: "security-headers",
+    hooks: {
+      "astro:config:setup": ({
+        addMiddleware,
+      }: {
+        addMiddleware: (params: { entrypoint: string; order: "pre" | "post" }) => void;
+      }) => {
+        addMiddleware({ entrypoint: securityHeadersEntry, order: "pre" });
+      },
+    },
+  };
+}
+
 async function collectFiles(dir: string, extensions: string[]): Promise<string[]> {
   const results: string[] = [];
   const entries = await readdir(dir, { withFileTypes: true });
@@ -190,6 +213,8 @@ export default defineConfig({
     // Registered first so its `pre` middleware is the outermost in the chain and
     // runs its post-next() CSP patch AFTER EmDash's auth middleware sets the CSP.
     emdashCspIntegration(),
+    // Public-site security headers (CSP/HSTS/etc.); self-excludes /_emdash.
+    securityHeadersIntegration(),
     emdash({
       database: sqlite({ url: databaseUrl }),
       storage: emdashStorage,
@@ -222,6 +247,7 @@ export default defineConfig({
             { label: "Content Management", slug: "docs/guides/content-management" },
             { label: "Internationalization", slug: "docs/guides/internationalization" },
             { label: "Customization", slug: "docs/guides/customization" },
+            { label: "AI-assisted development", slug: "docs/guides/ai-assisted-development" },
           ],
         },
         {

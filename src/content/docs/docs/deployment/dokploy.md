@@ -70,6 +70,47 @@ at a fraction of their size.
 > React bundles you may see under `/_astro` belong to the EmDash admin and only load on
 > `/_emdash` routes.
 
+## Security headers (CSP / HSTS)
+
+The app ships a middleware (`src/middleware/security-headers.ts`) that sends real
+security headers on the public site: a strict `Content-Security-Policy`, plus
+`Strict-Transport-Security`, `X-Frame-Options`, `X-Content-Type-Options`,
+`Referrer-Policy`, `Permissions-Policy`, and `Cross-Origin-Opener-Policy`. The CSP is
+**nonce-free and `'unsafe-inline'`-free for scripts** — it buffers each HTML response and
+computes a SHA-256 hash for every inline `<script>` actually emitted (the dark-mode
+bootstrap, analytics snippets, …) and auto-allowlists external script origins, so it
+stays strict without manual maintenance. The EmDash admin (`/_emdash`) is left to its own
+CSP. Set `DISABLE_SECURITY_HEADERS=1` to turn the middleware off (e.g. if your edge
+already sets these).
+
+> **Coverage note:** Astro middleware runs for server-rendered routes only. The
+> prerendered Starlight `/docs` pages, the `404`, and static assets under `/_astro` are
+> served directly by the Node adapter and **bypass** the middleware. For blanket coverage
+> (including those routes), also set headers at the **Traefik** layer — this is the
+> recommended production setup:
+
+```yaml
+http:
+  middlewares:
+    site-headers:
+      headers:
+        stsSeconds: 63072000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        contentTypeNosniff: true
+        referrerPolicy: strict-origin-when-cross-origin
+        frameDeny: true
+        permissionsPolicy: "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+  routers:
+    <existing-router-name>:
+      middlewares:
+        - site-compress
+        - site-headers
+```
+
+Leave the per-app CSP to the middleware (it varies per page), or replicate a static CSP
+here if you prefer the proxy to own everything.
+
 ## Database, migrations & seeding
 
 The SQLite database is runtime state and is not committed to git - it lives on the

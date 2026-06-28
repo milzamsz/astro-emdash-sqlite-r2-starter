@@ -47,12 +47,6 @@ Thumbs.db
 *.log
 *.tmp
 
-# Cloud
-.redwood
-.cloudflare
-cloudflare-pages-report.html
-.wrangler/
-
 # Dev verification artifacts
 screenshots/
 

@@ -24,7 +24,7 @@
     "set-site-url": "node scripts/set-site-url.mjs",
     "set-url-patterns": "node scripts/set-url-patterns.mjs",
     "lint": "pnpm run lint:js && pnpm run lint:css && pnpm run type-check && pnpm run check:kpis && pnpm run validate:i18n && pnpm run validate:secrets",
-    "lint:js": "eslint . --ignore-pattern dist --ignore-pattern .astro --ignore-pattern .wrangler --ignore-pattern node_modules",
+    "lint:js": "eslint . --ignore-pattern dist --ignore-pattern .astro --ignore-pattern node_modules",
     "lint:css": "stylelint src/styles/",
     "check:kpis": "node scripts/check-kpis.mjs",
     "type-check": "astro check",
