@@ -17,6 +17,7 @@
       "description": "Blog posts",
       "icon": "file-text",
       "supports": ["drafts", "revisions"],
+      "urlPattern": "/blog/{slug}",
       "fields": [
         { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
         { "slug": "description", "label": "Description", "type": "text" },
@@ -36,6 +37,7 @@
       "description": "Marketing and legal pages",
       "icon": "layout",
       "supports": ["drafts", "revisions"],
+      "urlPattern": "/{slug}",
       "fields": [
         { "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
         { "slug": "description", "label": "Description", "type": "text" },

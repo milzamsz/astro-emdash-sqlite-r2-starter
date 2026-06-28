@@ -24,6 +24,33 @@ defined in `seed/seed.json`.
 - Run `pnpm types:cms` after changing a collection schema to refresh generated types.
 - Run `pnpm export-seed` to snapshot current CMS content back into a seed file.
 
+### Public routes & the "View on site" link
+
+Each collection declares a `urlPattern` in `seed/seed.json` that maps an entry to its
+public route. This drives the admin's **View on site** link, sitemaps, menus, and
+redirects:
+
+| Collection | `urlPattern` | Example |
+| --- | --- | --- |
+| **Pages** | `/{slug}` | `contact` → `/contact` |
+| **Posts** | `/blog/{slug}` | `welcome` → `/blog/welcome` |
+
+Without a `urlPattern`, EmDash falls back to `/{collection}/{slug}` (e.g. `/pages/contact`),
+which has no matching route here. Fresh installs pick these up from the seed automatically.
+For a database that was seeded before these patterns existed, apply them once and restart:
+
+```bash
+# locally
+pnpm set-url-patterns
+
+# inside the container (Dokploy terminal), then restart the service
+cd /app && pnpm set-url-patterns
+```
+
+> The bundled page routes (`/about`, `/contact`, `/pricing`, `/privacy`, `/terms`) are the
+> ones wired to the `pages` collection. A page created in the admin with a different slug
+> needs a matching Astro route to render.
+
 ## File-based collections (Markdown/JSON)
 
 | Collection | Description | Files |
