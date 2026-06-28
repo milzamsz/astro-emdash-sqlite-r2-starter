@@ -22,9 +22,11 @@ This repo is built to be operated by AI coding agents. Stay **on-system**.
   no Tailwind palette utilities (`bg-blue-500`). Use semantic tokens
   (`bg-primary`, `text-foreground`, `var(--muted-foreground)`).
 - Dark mode must keep working (class strategy). Never hand-invert colors.
-- Preserve i18n (en default + `/id/`), Cloudflare Pages, SEO/OG/RSS/sitemap,
-  Pagefind, and Starlight docs.
-- New routes ship in both locales: `src/pages/x.astro` **and** `src/pages/[locale]/x.astro`.
+- Preserve i18n (English default; locale routing ready under `src/pages/[locale]/`),
+  server-rendered output (`@astrojs/node`, self-hosted via Docker), EmDash-sourced
+  content, SEO/OG/RSS/sitemap, Pagefind, and Starlight docs.
+- Blog posts and pages come from the EmDash CMS — don't hardcode copy that belongs in
+  a collection.
 
 **Verify before done:** `pnpm build`, `pnpm lint` (includes `pnpm check:kpis`),
 `pnpm run lint:css`. `check:kpis` is the source of truth for design conventions and

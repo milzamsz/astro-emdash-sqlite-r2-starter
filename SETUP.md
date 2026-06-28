@@ -64,6 +64,7 @@ Set these in production (Dokploy → service → Environment). See `.env.example
 | `S3_PUBLIC_URL` | no | Inert — media is served via EmDash's proxy route; leave empty |
 | `RESEND_API_KEY` | no | Enables magic-link sign-in / invites via Resend (auto-selected when set) |
 | `EMAIL_FROM` | with Resend | Verified sender, e.g. `Acme <noreply@your-domain>` |
+| `DISABLE_SECURITY_HEADERS` | no | Set to `1` to turn off the built-in CSP/HSTS middleware |
 
 If `S3_BUCKET` is empty, EmDash falls back to local filesystem storage under `./data/uploads`.
 
@@ -97,6 +98,15 @@ reverse proxy Dokploy runs: add a `compress` middleware (excluding `text/event-s
 EmDash live preview keeps working) and attach it to the app's router. Verify with
 `curl -sI -H "Accept-Encoding: br,gzip" https://your-domain | grep -i content-encoding`.
 Full config is in `/docs/deployment/dokploy`.
+
+### Security headers (CSP / HSTS)
+
+`src/middleware/security-headers.ts` sends a strict, hash-based `Content-Security-Policy`
+(no `'unsafe-inline'` for scripts) plus HSTS, `X-Frame-Options`, `X-Content-Type-Options`,
+`Referrer-Policy`, and `Permissions-Policy` on server-rendered pages. Astro middleware
+doesn't run for prerendered routes (`/docs`, `404`) or static assets, so also add a Traefik
+`headers` middleware for blanket coverage — full config is in `/docs/deployment/dokploy`.
+Disable the app-level middleware with `DISABLE_SECURITY_HEADERS=1`.
 
 ### Cloudflare R2
 

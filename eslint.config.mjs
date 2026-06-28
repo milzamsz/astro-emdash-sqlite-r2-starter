@@ -6,7 +6,7 @@ import globals from "globals";
 import prettier from "eslint-config-prettier";
 
 export default [
-  { ignores: ["dist/", ".astro/", ".wrangler/", "functions/", "scripts/", "**/*.d.ts", "**/*.cjs"] },
+  { ignores: ["dist/", ".astro/", "scripts/", "**/*.d.ts", "**/*.cjs"] },
 
   js.configs.recommended,
   ...tseslint.configs.recommended,

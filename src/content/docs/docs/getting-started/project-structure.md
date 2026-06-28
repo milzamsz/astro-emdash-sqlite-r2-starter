@@ -33,4 +33,5 @@ sidebar:
 - **CMS content**: blog and pages live in EmDash (SQLite), read at request time via `src/lib/cms.ts` and rendered with `<PortableText>`.
 - **Locale routing**: default-locale routes live at the root; add `src/pages/[locale]/` routes when introducing more languages.
 - **File-based collections**: Markdown in `src/content/` (docs, services, stack) with a `locale` frontmatter field.
+- **Starlight docs layout**: the docs site is the `docs` collection rooted at `src/content/docs/` (a fixed Starlight directory). Pages sit one level deeper, in `src/content/docs/docs/**`, so they serve under `/docs/...` rather than the site root `/`, which the marketing homepage owns. That nested `docs/docs` is intentional — the inner folder name is the `/docs` URL prefix and can't be flattened without colliding with the homepage.
 - **Server output**: the site is server-rendered via the Astro Node adapter and deployed as a Docker container.
