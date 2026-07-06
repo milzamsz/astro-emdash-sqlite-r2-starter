@@ -38,10 +38,10 @@
     "validate:secrets": "node scripts/validate-secrets.cjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^7.0.0",
-    "@astrojs/node": "^11.0.0",
-    "@astrojs/react": "^6.0.0",
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/mdx": "^7.0.2",
+    "@astrojs/node": "^11.0.2",
+    "@astrojs/react": "^6.0.1",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@aws-sdk/client-s3": "^3.1075.0",
     "@aws-sdk/s3-request-presigner": "^3.1075.0",
@@ -51,7 +51,7 @@
     "@iconify-json/lucide": "^1.2.114",
     "@iconify-json/simple-icons": "^1.2.87",
     "@tailwindcss/vite": "^4.3.1",
-    "astro": "^7.0.2",
+    "astro": "^7.0.6",
     "astro-icon": "^1.1.5",
     "better-sqlite3": "^12.8.0",
     "clsx": "^2.1.1",
@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@astrojs/starlight": "^0.41.0",
+    "@astrojs/starlight": "^0.41.3",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.53.0",
     "@types/node": "^20.0.0",
