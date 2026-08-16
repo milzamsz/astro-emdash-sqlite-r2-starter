@@ -41,10 +41,17 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const csp = response.headers.get("content-security-policy");
   if (!csp || !csp.includes("connect-src")) return response;
 
-  const patched = csp.replace(/connect-src ([^;]*)/, (_match, value: string) => {
-    const additions = EXTRA_ORIGINS.filter((origin) => !value.includes(origin));
-    return additions.length ? `connect-src ${value} ${additions.join(" ")}` : `connect-src ${value}`;
-  });
+  const patched = csp.replace(
+    /connect-src ([^;]*)/,
+    (_match, value: string) => {
+      const additions = EXTRA_ORIGINS.filter(
+        (origin) => !value.includes(origin),
+      );
+      return additions.length
+        ? `connect-src ${value} ${additions.join(" ")}`
+        : `connect-src ${value}`;
+    },
+  );
 
   response.headers.set("content-security-policy", patched);
   return response;

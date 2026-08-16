@@ -67,8 +67,9 @@ const encodedUrl = encodeURIComponent(url);
 <script>
   const copiedText = "Copied!";
 
-  document.querySelectorAll<HTMLButtonElement>("[data-share-native]").forEach(
-    (btn) => {
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-share-native]")
+    .forEach((btn) => {
       if (!navigator.share) return;
       btn.hidden = false;
       btn.addEventListener("click", async () => {
@@ -81,11 +82,11 @@ const encodedUrl = encodeURIComponent(url);
           /* user dismissed the share sheet */
         }
       });
-    },
-  );
+    });
 
-  document.querySelectorAll<HTMLButtonElement>("[data-share-copy]").forEach(
-    (btn) => {
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-share-copy]")
+    .forEach((btn) => {
       const label = btn.querySelector<HTMLElement>("[data-copy-label]");
       const original = label?.textContent ?? "";
       let timer: number | undefined;
@@ -111,8 +112,7 @@ const encodedUrl = encodeURIComponent(url);
           if (label) label.textContent = original;
         }, 2000);
       });
-    },
-  );
+    });
 </script>
 
 <style>

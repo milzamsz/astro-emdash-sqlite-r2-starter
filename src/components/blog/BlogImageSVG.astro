@@ -63,8 +63,12 @@ const tick = 30 + ((hash >> 5) % 60);
     {rings.map((r) => <circle cx={cx} cy={cy} r={r} />)}
   </g>
 
-  <line x1="72" y1={tick + 510} x2="172" y2={tick + 510} class="blog-cover__rule"
-  ></line>
+  <line
+    x1="72"
+    y1={tick + 510}
+    x2="172"
+    y2={tick + 510}
+    class="blog-cover__rule"></line>
 </svg>
 
 <style>

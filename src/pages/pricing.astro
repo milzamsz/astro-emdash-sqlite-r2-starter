@@ -89,11 +89,12 @@ const plans: Plan[] = [
       {
         plans.map((plan) => (
           <article
-            class:list={["pricing__card", plan.popular && "pricing__card--popular"]}
+            class:list={[
+              "pricing__card",
+              plan.popular && "pricing__card--popular",
+            ]}
           >
-            {plan.popular && (
-              <span class="pricing__badge">Most popular</span>
-            )}
+            {plan.popular && <span class="pricing__badge">Most popular</span>}
             <h2 class="pricing__name">{plan.name}</h2>
             <p class="pricing__price">
               <span class="pricing__amount">{plan.price}</span>

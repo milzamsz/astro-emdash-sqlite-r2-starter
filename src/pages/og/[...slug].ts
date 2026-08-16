@@ -3,12 +3,7 @@ import { siteConfig } from "../../config/site.config";
 import { getPage, getPostEntry } from "../../lib/cms";
 
 type OgKind =
-  | "home"
-  | "page"
-  | "blog"
-  | "service"
-  | "blog-list"
-  | "services-list";
+  "home" | "page" | "blog" | "service" | "blog-list" | "services-list";
 
 function escapeXml(value: string) {
   return value

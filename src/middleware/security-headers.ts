@@ -82,7 +82,10 @@ function buildCsp(html: string): string {
     o.includes("googletagmanager.com"),
   );
   const gaHosts = usesGoogleAnalytics
-    ? ["https://www.google-analytics.com", "https://region1.google-analytics.com"]
+    ? [
+        "https://www.google-analytics.com",
+        "https://region1.google-analytics.com",
+      ]
     : [];
 
   const scriptSrc = ["'self'", ...hashes, ...scriptOrigins].join(" ");

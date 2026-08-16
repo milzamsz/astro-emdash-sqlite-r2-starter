@@ -149,7 +149,12 @@ export interface CmsPage {
     hero: { title?: string; subtitle?: string } | null;
     featuresTitle?: string;
     features: CmsFeature[];
-    cta: { title?: string; text?: string; button?: string; href?: string } | null;
+    cta: {
+      title?: string;
+      text?: string;
+      button?: string;
+      href?: string;
+    } | null;
     isLegal: boolean;
   };
   content: PortableBlock[];
@@ -192,7 +197,8 @@ function adaptPage(entry: RawEntry): CmsPage {
     data: {
       slug: asString(d.slug, entry.id),
       title: asString(d.title),
-      description: typeof d.description === "string" ? d.description : undefined,
+      description:
+        typeof d.description === "string" ? d.description : undefined,
       hero,
       featuresTitle: asString(d.features_title) || undefined,
       features,

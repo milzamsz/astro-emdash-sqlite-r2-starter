@@ -22,10 +22,7 @@ function slugify(value: string) {
 
 {
   tags.length > 0 && (
-    <div
-      class="blog-tags"
-      aria-label="Post tags"
-    >
+    <div class="blog-tags" aria-label="Post tags">
       {tags.map((tag) => (
         <a href={`${basePath}?tag=${slugify(tag)}`}>
           <Badge variant="outline">{tag}</Badge>

@@ -61,7 +61,14 @@ const allTags = [
       <p class="blog-list__count">
         {filteredPosts.length}
         {filteredPosts.length === 1 ? " article" : " articles"}
-        {currentTag && <> tagged <strong>#{currentTag}</strong></>}
+        {
+          currentTag && (
+            <>
+              {" "}
+              tagged <strong>#{currentTag}</strong>
+            </>
+          )
+        }
       </p>
     </header>
 

@@ -40,7 +40,13 @@ const dateLabel = publishDate.toLocaleDateString("en-US", {
 ---
 
 <Card hover={true} class={`blog-card blog-card--${variant}`}>
-  <a slot="header" class="blog-card__media" href={href} aria-hidden="true" tabindex="-1">
+  <a
+    slot="header"
+    class="blog-card__media"
+    href={href}
+    aria-hidden="true"
+    tabindex="-1"
+  >
     <BlogImageSVG slug={post.data.svgSlug ?? post.id} title={post.data.title} />
   </a>
   <div class="blog-card__body">
@@ -48,9 +54,15 @@ const dateLabel = publishDate.toLocaleDateString("en-US", {
     <p class="blog-card__meta">
       <time datetime={publishDate.toISOString()}>{dateLabel}</time>
       <span class="blog-card__dot" aria-hidden="true">&middot;</span>
-      <span>{t(locale, "blog.minutesRead").replace("{n}", String(readingTime))}</span>
+      <span
+        >{
+          t(locale, "blog.minutesRead").replace("{n}", String(readingTime))
+        }</span
+      >
     </p>
-    <Heading class="blog-card__title"><a href={href}>{post.data.title}</a></Heading>
+    <Heading class="blog-card__title"
+      ><a href={href}>{post.data.title}</a></Heading
+    >
     <p class="blog-card__excerpt">{excerpt}</p>
     <TagList tags={post.data.tags ?? []} locale={locale} />
   </div>
