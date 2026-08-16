@@ -1,36 +1,35 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("contact form", () => {
-  test("contact page renders the form", async ({ page }) => {
+test.describe("contact page", () => {
+  test("contact page renders with contact info", async ({ page }) => {
     test.setTimeout(60_000);
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
-    await expect(page.locator("#contact-form")).toBeVisible({
+    // The contact page has an email button and contact methods
+    await expect(page.locator(".contact").first()).toBeVisible({
       timeout: 30_000,
     });
-    await expect(page.locator("#name")).toBeVisible({ timeout: 30_000 });
-    await expect(page.locator("#email")).toBeVisible({ timeout: 30_000 });
-    await expect(page.locator("#message")).toBeVisible({ timeout: 30_000 });
+    await expect(page.locator(".contact__methods").first()).toBeVisible({
+      timeout: 30_000,
+    });
   });
 
-  test("submitting empty leaves the success message hidden", async ({
-    page,
-  }) => {
+  test("contact page has a mailto link", async ({ page }) => {
     test.setTimeout(60_000);
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
-    await expect(page.locator("#submit-btn")).toBeVisible({ timeout: 30_000 });
-    await page.locator("#submit-btn").click();
-    await expect(page.locator("#form-success")).toBeHidden({ timeout: 30_000 });
+    const mailtoLink = page.locator('a[href^="mailto:"]').first();
+    await expect(mailtoLink).toBeVisible({ timeout: 30_000 });
+    const href = await mailtoLink.getAttribute("href");
+    expect(href).toContain("mailto:");
   });
 
-  test("filling the form keeps the submit button enabled", async ({ page }) => {
+  test("contact page shows map or placeholder", async ({ page }) => {
     test.setTimeout(60_000);
     await page.goto("/contact", { waitUntil: "domcontentloaded" });
-    await expect(page.locator("#name")).toBeVisible({ timeout: 30_000 });
-    await page.locator("#name").fill("Test User");
-    await page.locator("#email").fill("test@example.com");
-    await page
-      .locator("#message")
-      .fill("This is a test message long enough to pass validation.");
-    await expect(page.locator("#submit-btn")).toBeEnabled({ timeout: 30_000 });
+    // Either the map facade button or the placeholder should be visible
+    const mapFacade = page.locator(".contact__map-facade").first();
+    const mapPlaceholder = page.locator(".contact__placeholder").first();
+    await expect(mapFacade.or(mapPlaceholder).first()).toBeVisible({
+      timeout: 30_000,
+    });
   });
 });
