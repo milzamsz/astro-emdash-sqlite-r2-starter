@@ -60,8 +60,8 @@ dependencies:
     specifier: 1.0.0-beta.4
     version: 1.0.0-beta.4(typescript@6.0.3)
   emdash:
-    specifier: ^0.23.0
-    version: 0.23.0(@astrojs/react@6.0.2)(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@tiptap/pm@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(astro@7.2.2)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3)
+    specifier: ^0.33.0
+    version: 0.33.0(@astrojs/react@6.0.2)(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(astro@7.2.2)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3)
   react:
     specifier: '19'
     version: 19.2.7
@@ -1440,8 +1440,8 @@ packages:
       tslib: 2.8.1
     dev: false
 
-  /@emdash-cms/admin@0.23.0(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3)(zod@4.4.3):
-    resolution: {integrity: sha512-FjJScgEQqvfeDTBn5ihKj6QQWkE5Nm90cJJYgsO387RKQTLR+q/GtVFwM6ULyUaYBKLYW252aQ6uKe3DKtgMWQ==}
+  /@emdash-cms/admin@0.33.0(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3)(zod@4.4.3):
+    resolution: {integrity: sha512-rn1J2XyQIhEx/OOzgbMfErZZbKHuQT8QcXHQo+Q7z4EYXZzRJT6nciczzUAdEdV0glcTcrP2SDqRzdwizwzt8w==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -1452,10 +1452,10 @@ packages:
       '@dnd-kit/core': 6.3.1(react-dom@19.2.7)(react@19.2.7)
       '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1)(react@19.2.7)
       '@dnd-kit/utilities': 3.2.2(react@19.2.7)
-      '@emdash-cms/blocks': 0.23.0(@types/react@19.2.18)(react-dom@19.2.7)(react@19.2.7)(zod@4.4.3)
-      '@emdash-cms/plugin-types': 0.1.0
-      '@emdash-cms/registry-client': 0.3.2(typescript@6.0.3)
-      '@emdash-cms/registry-lexicons': 0.1.1
+      '@emdash-cms/blocks': 0.33.0(@types/react@19.2.18)(react-dom@19.2.7)(react@19.2.7)(zod@4.4.3)
+      '@emdash-cms/plugin-types': 0.3.0
+      '@emdash-cms/registry-client': 0.3.4(typescript@6.0.3)
+      '@emdash-cms/registry-lexicons': 0.3.0
       '@floating-ui/react': 0.27.19(react-dom@19.2.7)(react@19.2.7)
       '@lingui/core': 5.9.5
       '@lingui/react': 5.9.5(react@19.2.7)
@@ -1464,6 +1464,7 @@ packages:
       '@tanstack/react-router': 1.163.2(react-dom@19.2.7)(react@19.2.7)
       '@tiptap/core': 3.27.1(@tiptap/pm@3.27.1)
       '@tiptap/extension-character-count': 3.27.1(@tiptap/extensions@3.27.1)
+      '@tiptap/extension-code': 3.27.1(@tiptap/core@3.27.1)
       '@tiptap/extension-code-block': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-collaboration': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)(@tiptap/y-tiptap@3.0.5)(yjs@13.6.31)
       '@tiptap/extension-drag-handle': 3.27.1(@tiptap/core@3.27.1)(@tiptap/extension-collaboration@3.27.1)(@tiptap/extension-node-range@3.27.1)(@tiptap/pm@3.27.1)(@tiptap/y-tiptap@3.0.5)
@@ -1471,8 +1472,11 @@ packages:
       '@tiptap/extension-dropcursor': 3.27.1(@tiptap/extensions@3.27.1)
       '@tiptap/extension-focus': 3.27.1(@tiptap/extensions@3.27.1)
       '@tiptap/extension-link': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
+      '@tiptap/extension-list': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-node-range': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-placeholder': 3.27.1(@tiptap/extensions@3.27.1)
+      '@tiptap/extension-subscript': 3.30.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
+      '@tiptap/extension-superscript': 3.30.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-table': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-table-cell': 3.27.1(@tiptap/extension-table@3.27.1)
       '@tiptap/extension-table-header': 3.27.1(@tiptap/extension-table@3.27.1)
@@ -1513,8 +1517,8 @@ packages:
       - zod
     dev: false
 
-  /@emdash-cms/auth@0.23.0(astro@7.2.2)(kysely@0.29.2):
-    resolution: {integrity: sha512-doAR611XrKUyx9NnqQBRu+a5UDcr7w+XoTEI48rtM7wnbyUjdQkUQuKd5oit++esQ1B2Ei+sPHyK0Jct3tt7wQ==}
+  /@emdash-cms/auth@0.33.0(astro@7.2.2)(kysely@0.29.2):
+    resolution: {integrity: sha512-mWo9drD7ob4Ill9Z4LbSkMHFvq3dr/zNLo6fWsXGCkUSMjS7kwIqzTmD/yOf5fpq8GoxDXeZdF3XDFz/1lu+fg==}
     peerDependencies:
       astro: '>=6.0.0-beta.0'
       kysely: ^0.29.0
@@ -1531,8 +1535,8 @@ packages:
       zod: 4.4.3
     dev: false
 
-  /@emdash-cms/blocks@0.23.0(@types/react@19.2.18)(react-dom@19.2.7)(react@19.2.7)(zod@4.4.3):
-    resolution: {integrity: sha512-QJlLO9N9Pgzc/ucPFFyCf4YlGf7rkqUJCkXmVMZl6v/LbPWezxwDUo1mhcl7WtB9A5HbDjq5EztI7IB6M/ODXw==}
+  /@emdash-cms/blocks@0.33.0(@types/react@19.2.18)(react-dom@19.2.7)(react@19.2.7)(zod@4.4.3):
+    resolution: {integrity: sha512-vTAigACAWe08cvXlulWJk9VogfgfrZadjYVkil2e6FxZG+cQkyFwFqROOG5yAT9I20AEIbMl8GXNEMaZc2W2gg==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -1552,30 +1556,32 @@ packages:
       - zod
     dev: false
 
-  /@emdash-cms/gutenberg-to-portable-text@0.23.0:
-    resolution: {integrity: sha512-l1yN7BJonEW94fFjTI7raItl5/riw9KYEkGlpfKjyBPhXtyL4nsbRQpzP6e5bN6biZZegWLRxxuFH2YNPd7wjw==}
+  /@emdash-cms/gutenberg-to-portable-text@0.33.0:
+    resolution: {integrity: sha512-lu3XEbOnEpzXZXPfqTL1oxzrRgYl6WbjV6stXFrCUjDa046VTtcWpQDjnwYUidc++bNnu+Ixr8Nj9VUQKhO/mA==}
     dependencies:
       '@wordpress/block-serialization-default-parser': 5.49.0
       parse5: 7.3.0
     dev: false
 
-  /@emdash-cms/plugin-types@0.1.0:
-    resolution: {integrity: sha512-aV6bQ/XUK/KBjuG6wVMhtMPWjG4n5VM5qjZY1SVJed9qFWKmzvyMlf00x2Y/nQfp5Hik2Yj2AVeAGf0dtuhvOw==}
+  /@emdash-cms/plugin-types@0.3.0:
+    resolution: {integrity: sha512-2/siADnsr79FIOHbiGtsKpQojNid2Uqpuurhh6vIkhuzQN0jVBLiPDhX/LAK28l4l7UVyEnWpxI6HMImHZEPvg==}
+    dependencies:
+      zod: 4.4.3
     dev: false
 
-  /@emdash-cms/registry-client@0.3.2(typescript@6.0.3):
-    resolution: {integrity: sha512-2mjKuMUbFNeLVuRoBwbB4xu1AXpsCWFSJLIJcH0tceddd6MZEAYpkaiQLFpBhrIDYKFM5Gg73Qha7UX9PmQ7PA==}
+  /@emdash-cms/registry-client@0.3.4(typescript@6.0.3):
+    resolution: {integrity: sha512-NWtoAMVE2K5R/57CXxaOMXkRZFZNKsKgu43xcjrmZ9HEeyGHWl6egHn97/Ey4aDPUDao2vb85GSvlYbewCwP9g==}
     dependencies:
       '@atcute/atproto': 4.0.2(@atcute/lexicons@2.0.1)
       '@atcute/client': 5.1.0(@atcute/lexicons@2.0.1)(typescript@6.0.3)
       '@atcute/lexicons': 2.0.1
-      '@emdash-cms/registry-lexicons': 0.1.1
+      '@emdash-cms/registry-lexicons': 0.3.0
     transitivePeerDependencies:
       - typescript
     dev: false
 
-  /@emdash-cms/registry-lexicons@0.1.1:
-    resolution: {integrity: sha512-0en1SWbqP4lICGafxHhJzxpCbAYB2fk2uPYmsAAi4lILGtR0/fY6HCLZ17ta16zTf12Q7H0VhuA0zEl9Gc93Sw==}
+  /@emdash-cms/registry-lexicons@0.3.0:
+    resolution: {integrity: sha512-yvT+LEL54kiweMnHoU87qHdF6O0+eI6NNf4e1b9qk/yO+SEW0bm20J/EGWRQ8qmwArknVhkxfeq2A0fo8mTAZg==}
     dependencies:
       '@atcute/atproto': 4.0.2(@atcute/lexicons@2.0.1)
       '@atcute/lexicons': 2.0.1
@@ -2642,22 +2648,26 @@ packages:
 
   /@oslojs/asn1@1.0.0:
     resolution: {integrity: sha512-zw/wn0sj0j0QKbIXfIlnEcTviaCzYOY3V5rAyjR6YtOByFtJiT574+8p9Wlach0lZH9fddD4yb9laEAIl4vXQA==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/binary': 1.0.0
     dev: false
 
   /@oslojs/binary@1.0.0:
     resolution: {integrity: sha512-9RCU6OwXU6p67H4NODbuxv2S3eenuQ4/WFLrsq+K/k682xrznH5EVWA7N4VFk9VYVcbFtKqur5YQQZc0ySGhsQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dev: false
 
   /@oslojs/cbor@1.0.0:
     resolution: {integrity: sha512-AY6Lknexs7n2xp8Cgey95c+975VG7XOk4UEdRdNFxHmDDbuf47OC/LAVRsl14DeTLwo8W6xr3HLFwUFmKcndTQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/binary': 1.0.0
     dev: false
 
   /@oslojs/crypto@1.0.0:
     resolution: {integrity: sha512-dVz8TkkgYdr3tlwxHd7SCYGxoN7ynwHLA0nei/Aq9C+ERU0BK+U8+/3soEzBUxUNKYBf42351DyJUZ2REla50w==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/asn1': 1.0.0
       '@oslojs/binary': 1.0.0
@@ -2665,6 +2675,7 @@ packages:
 
   /@oslojs/crypto@1.0.1:
     resolution: {integrity: sha512-7n08G8nWjAr/Yu3vu9zzrd0L9XnrJfpMioQcvCMxBIiF5orECHe5/3J0jmXRVvgfqMm/+4oxlQ+Sq39COYLcNQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/asn1': 1.0.0
       '@oslojs/binary': 1.0.0
@@ -2683,12 +2694,14 @@ packages:
 
   /@oslojs/jwt@0.2.0:
     resolution: {integrity: sha512-bLE7BtHrURedCn4Mco3ma9L4Y1GR2SMBuIvjWr7rmQ4/W/4Jy70TIAgZ+0nIlk0xHz1vNP8x8DCns45Sb2XRbg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/encoding': 0.4.1
     dev: false
 
   /@oslojs/webauthn@1.0.0:
     resolution: {integrity: sha512-2ZRpbt3msNURwvjmavzq9vrNlxUnWFBGMYqbC1kO3fYBLskL7r4DiLJT1wbtLoI+hclFwjhl48YhRFBl6RWg1A==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/asn1': 1.0.0
       '@oslojs/binary': 1.0.0
@@ -3556,6 +3569,26 @@ packages:
       '@tiptap/core': 3.27.1(@tiptap/pm@3.27.1)
     dev: false
 
+  /@tiptap/extension-subscript@3.30.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1):
+    resolution: {integrity: sha512-D9eaOWJqH/oq5+qCBL0YzH2iTwGBDO8N1OfRWDV+8lFYfRSUHhMr9tTrs7h7akik9X9S0H1V2oEVm6DAdY+X2Q==}
+    peerDependencies:
+      '@tiptap/core': 3.30.1
+      '@tiptap/pm': 3.30.1
+    dependencies:
+      '@tiptap/core': 3.27.1(@tiptap/pm@3.27.1)
+      '@tiptap/pm': 3.27.1
+    dev: false
+
+  /@tiptap/extension-superscript@3.30.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1):
+    resolution: {integrity: sha512-DJY1X+v5rs4HUwXvMHtWlYFlJjtHqWvQxO+yNIp3IvSu9Grh1UTfYROI4eIrUzNTUAx2ShT6UdCmiWF7SwYhjw==}
+    peerDependencies:
+      '@tiptap/core': 3.30.1
+      '@tiptap/pm': 3.30.1
+    dependencies:
+      '@tiptap/core': 3.27.1(@tiptap/pm@3.27.1)
+      '@tiptap/pm': 3.27.1
+    dev: false
+
   /@tiptap/extension-table-cell@3.27.1(@tiptap/extension-table@3.27.1):
     resolution: {integrity: sha512-aopweoHugP+ZR5WTgb7mccXXWmjoNv7PBjtQDl8rvS4IWsJE1w23B+rkj7VuoncO8WK5bU3SS9O3l5aObql68w==}
     peerDependencies:
@@ -4308,6 +4341,7 @@ packages:
 
   /arctic@3.7.0:
     resolution: {integrity: sha512-ZMQ+f6VazDgUJOd+qNV+H7GohNSYal1mVjm5kEaZfE2Ifb7Ss70w+Q7xpJC87qZDkMZIXYf0pTIYZA0OPasSbw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     dependencies:
       '@oslojs/crypto': 1.0.1
       '@oslojs/encoding': 1.1.0
@@ -4732,10 +4766,8 @@ packages:
     resolution: {integrity: sha512-77PSwercCZU2Fc4sX94eF8k8Pxte6JAwL4/ICZLFjJLqegs7kCuAsqqj/70NQF6TvDpgFjkubQB2FW2ZZddvQg==}
     engines: {node: '>=8'}
 
-  /citty@0.1.6:
-    resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
-    dependencies:
-      consola: 3.4.2
+  /citty@0.2.2:
+    resolution: {integrity: sha512-+6vJA3L98yv+IdfKGZHBNiGW5KHn22e/JwID0Strsz8h4S/csAu/OuICwxrg44k5MRiZHWIo8XXuJgQTriRP4w==}
     dev: false
 
   /class-variance-authority@0.7.1:
@@ -5114,8 +5146,8 @@ packages:
     resolution: {integrity: sha512-v/qV5aV5EUA2pGilzUCq5/eyOloZAqDZBu9UMBIzgPpLlprjSR6zswsWBTv0KpqxLGUAZEwhO95ZCt7srymNVA==}
     dev: false
 
-  /emdash@0.23.0(@astrojs/react@6.0.2)(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@tiptap/pm@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(astro@7.2.2)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3):
-    resolution: {integrity: sha512-/rQfifu45d1+ctlhlVEPkOzZuyLWo5QfualVjl4RjtQVf2wjTy0w8qPp4F39jWXCLSn8gBC5JOnci4d75CkndA==}
+  /emdash@0.33.0(@astrojs/react@6.0.2)(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(astro@7.2.2)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3):
+    resolution: {integrity: sha512-JbqtklQn2QBJ6+n227JEdBE6MELcfHSjDUpLvFP46N3Mkp+gStFW35l5ghRZfJ+1bDsdEU7ePw4JeIYxxEwghw==}
     hasBin: true
     peerDependencies:
       '@astrojs/react': '>=5.0.0-beta.0'
@@ -5131,25 +5163,28 @@ packages:
       '@atcute/client': 5.1.0(@atcute/lexicons@2.0.1)(typescript@6.0.3)
       '@atcute/lexicons': 2.0.1
       '@atcute/multibase': 1.2.3
-      '@emdash-cms/admin': 0.23.0(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3)(zod@4.4.3)
-      '@emdash-cms/auth': 0.23.0(astro@7.2.2)(kysely@0.29.2)
-      '@emdash-cms/gutenberg-to-portable-text': 0.23.0
-      '@emdash-cms/plugin-types': 0.1.0
-      '@emdash-cms/registry-client': 0.3.2(typescript@6.0.3)
+      '@emdash-cms/admin': 0.33.0(@atcute/identity@2.0.0)(@floating-ui/dom@1.7.6)(@tiptap/extensions@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)(prosemirror-view@1.41.9)(react-dom@19.2.7)(react@19.2.7)(typescript@6.0.3)(zod@4.4.3)
+      '@emdash-cms/auth': 0.33.0(astro@7.2.2)(kysely@0.29.2)
+      '@emdash-cms/gutenberg-to-portable-text': 0.33.0
+      '@emdash-cms/plugin-types': 0.3.0
+      '@emdash-cms/registry-client': 0.3.4(typescript@6.0.3)
       '@floating-ui/react': 0.27.19(react-dom@19.2.7)(react@19.2.7)
       '@modelcontextprotocol/sdk': 1.29.0(zod@4.4.3)
       '@oslojs/crypto': 1.0.1
       '@oslojs/encoding': 1.1.0
       '@portabletext/toolkit': 5.0.2
       '@tiptap/core': 3.27.1(@tiptap/pm@3.27.1)
+      '@tiptap/extension-code': 3.27.1(@tiptap/core@3.27.1)
       '@tiptap/extension-code-block': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-focus': 3.27.1(@tiptap/extensions@3.27.1)
       '@tiptap/extension-image': 3.27.1(@tiptap/core@3.27.1)
       '@tiptap/extension-link': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
+      '@tiptap/extension-list': 3.27.1(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
       '@tiptap/extension-placeholder': 3.27.1(@tiptap/extensions@3.27.1)
       '@tiptap/extension-text-align': 3.27.1(@tiptap/core@3.27.1)
       '@tiptap/extension-typography': 3.27.1(@tiptap/core@3.27.1)
       '@tiptap/extension-underline': 3.27.1(@tiptap/core@3.27.1)
+      '@tiptap/pm': 3.27.1
       '@tiptap/react': 3.27.1(@floating-ui/dom@1.7.6)(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)(@types/react-dom@19.2.4)(@types/react@19.2.18)(react-dom@19.2.7)(react@19.2.7)
       '@tiptap/starter-kit': 3.27.1
       '@tiptap/suggestion': 3.27.1(@floating-ui/dom@1.7.6)(@tiptap/core@3.27.1)(@tiptap/pm@3.27.1)
@@ -5159,7 +5194,7 @@ packages:
       astro-portabletext: 0.11.4(astro@7.2.2)
       better-sqlite3: 12.11.1
       blurhash: 2.0.5
-      citty: 0.1.6
+      citty: 0.2.2
       consola: 3.4.2
       croner: 10.0.1
       image-size: 2.0.2
@@ -5187,7 +5222,6 @@ packages:
       - '@floating-ui/dom'
       - '@lingui/babel-plugin-lingui-macro'
       - '@tiptap/extensions'
-      - '@tiptap/pm'
       - '@types/react'
       - '@types/react-dom'
       - babel-plugin-macros
