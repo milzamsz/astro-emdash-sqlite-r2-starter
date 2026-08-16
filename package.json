@@ -73,12 +73,12 @@
     "@types/node": "^20.0.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "@typescript-eslint/eslint-plugin": "^8.62.0",
-    "@typescript-eslint/parser": "^8.62.0",
-    "astro-eslint-parser": "^2.1.0",
-    "eslint": "^10.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
+    "astro-eslint-parser": "^3.1.0",
+    "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-astro": "^2.1.1",
+    "eslint-plugin-astro": "^3.1.0",
     "globals": "^17.11.0",
     "pagefind": "^1.5.2",
     "prettier": "^3.9.6",
@@ -88,7 +88,7 @@
     "stylelint-config-recommended-scss": "^17.0.1",
     "stylelint-config-standard": "^40.0.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
+    "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.10"
   }
 }
