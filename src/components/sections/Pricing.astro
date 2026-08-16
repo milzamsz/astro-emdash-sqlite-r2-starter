@@ -42,9 +42,7 @@ const { title, description, plans } = Astro.props as Props;
             <span class="pricing__amount">{plan.price}</span>
             {plan.period && <span class="pricing__period">/{plan.period}</span>}
           </p>
-          {plan.description && (
-            <p class="pricing__desc">{plan.description}</p>
-          )}
+          {plan.description && <p class="pricing__desc">{plan.description}</p>}
           <ul class="pricing__features">
             {plan.features.map((feature) => (
               <li class="pricing__feature">

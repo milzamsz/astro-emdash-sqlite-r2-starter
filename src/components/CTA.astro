@@ -33,6 +33,8 @@ const {
   primaryText={ctaText}
   primaryHref={ctaHref ? resolveRoute(locale, ctaHref) : undefined}
   secondaryText={secondaryText}
-  secondaryHref={secondaryHref ? resolveRoute(locale, secondaryHref) : undefined}
+  secondaryHref={secondaryHref
+    ? resolveRoute(locale, secondaryHref)
+    : undefined}
   centered={true}
 />

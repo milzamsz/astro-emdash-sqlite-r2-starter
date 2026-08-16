@@ -10,20 +10,52 @@ interface LlmLink {
 }
 
 const corePages: LlmLink[] = [
-  { label: "Home", path: "/", description: "Production-ready marketing homepage." },
-  { label: "About", path: "/about", description: "Project background and overview." },
+  {
+    label: "Home",
+    path: "/",
+    description: "Production-ready marketing homepage.",
+  },
+  {
+    label: "About",
+    path: "/about",
+    description: "Project background and overview.",
+  },
   { label: "Services", path: "/services", description: "Service offerings." },
-  { label: "Pricing", path: "/pricing", description: "Plans and pricing tiers." },
+  {
+    label: "Pricing",
+    path: "/pricing",
+    description: "Plans and pricing tiers.",
+  },
   { label: "Contact", path: "/contact", description: "Contact details." },
   { label: "Blog", path: "/blog", description: "Articles and updates." },
-  { label: "Documentation", path: "/docs", description: "Setup and usage guides." },
+  {
+    label: "Documentation",
+    path: "/docs",
+    description: "Setup and usage guides.",
+  },
 ];
 
 const stack: LlmLink[] = [
-  { label: "Astro", path: "https://astro.build", description: "Static site generator for fast content sites." },
-  { label: "Starlight", path: "https://starlight.astro.build", description: "Documentation framework for Astro." },
-  { label: "EmDash", path: "https://github.com/emdash-cms/emdash", description: "Git-friendly CMS for the blog and pages." },
-  { label: "Docker", path: "https://www.docker.com", description: "Containerized self-hosting, with Cloudflare R2 for media." },
+  {
+    label: "Astro",
+    path: "https://astro.build",
+    description: "Static site generator for fast content sites.",
+  },
+  {
+    label: "Starlight",
+    path: "https://starlight.astro.build",
+    description: "Documentation framework for Astro.",
+  },
+  {
+    label: "EmDash",
+    path: "https://github.com/emdash-cms/emdash",
+    description: "Git-friendly CMS for the blog and pages.",
+  },
+  {
+    label: "Docker",
+    path: "https://www.docker.com",
+    description: "Containerized self-hosting, with Cloudflare R2 for media.",
+  },
 ];
 
 export const GET: APIRoute = () => {

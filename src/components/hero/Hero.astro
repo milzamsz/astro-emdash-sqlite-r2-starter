@@ -42,43 +42,43 @@ const hasImageSlot = Astro.slots.has("image");
   <span class="bg-glow" aria-hidden="true"></span>
   <section class={`${heroVariantClasses[variant]} container`}>
     <div class="hero__content">
-    {props.eyebrow && <p class="hero__eyebrow">{props.eyebrow}</p>}
+      {props.eyebrow && <p class="hero__eyebrow">{props.eyebrow}</p>}
+      {
+        headline && (
+          <h1 class={`hero__headline hero__headline--${props.size ?? "lg"}`}>
+            {headline}
+          </h1>
+        )
+      }
+      {subheadline && <p class="hero__subheadline">{subheadline}</p>}
+      {
+        (primaryCta || props.secondaryCta) && (
+          <div class="hero__actions">
+            {primaryCta && (
+              <Button href={resolveRoute(locale, primaryCta.href)}>
+                {primaryCta.label}
+              </Button>
+            )}
+            {props.secondaryCta && (
+              <Button
+                href={resolveRoute(locale, props.secondaryCta.href)}
+                variant="secondary"
+              >
+                {props.secondaryCta.label}
+              </Button>
+            )}
+          </div>
+        )
+      }
+    </div>
+
     {
-      headline && (
-        <h1 class={`hero__headline hero__headline--${props.size ?? "lg"}`}>
-          {headline}
-        </h1>
-      )
-    }
-    {subheadline && <p class="hero__subheadline">{subheadline}</p>}
-    {
-      (primaryCta || props.secondaryCta) && (
-        <div class="hero__actions">
-          {primaryCta && (
-            <Button href={resolveRoute(locale, primaryCta.href)}>
-              {primaryCta.label}
-            </Button>
-          )}
-          {props.secondaryCta && (
-            <Button
-              href={resolveRoute(locale, props.secondaryCta.href)}
-              variant="secondary"
-            >
-              {props.secondaryCta.label}
-            </Button>
-          )}
+      (hasImageSlot || variant === "split") && (
+        <div class="hero__media">
+          <slot name="image" />
         </div>
       )
     }
-  </div>
-
-  {
-    (hasImageSlot || variant === "split") && (
-      <div class="hero__media">
-        <slot name="image" />
-      </div>
-    )
-  }
   </section>
 </div>
 

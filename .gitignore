@@ -59,4 +59,5 @@ lh-*.json
 # Temporary files
 *.swp
 *.swo
-*~
+*~test-results/
+.hermes/
