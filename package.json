@@ -53,7 +53,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.2",
     "astro-icon": "^1.1.5",
-    "better-sqlite3": "^12.8.0",
+    "better-sqlite3": "^13.0.3",
     "clsx": "^2.1.1",
     "cva": "1.0.0-beta.8",
     "emdash": "^0.33.0",
