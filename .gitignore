@@ -61,3 +61,4 @@ lh-*.json
 *.swo
 *~test-results/
 .hermes/
+test-results/
