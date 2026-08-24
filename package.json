@@ -38,9 +38,9 @@
     "validate:secrets": "node scripts/validate-secrets.cjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^7.0.5",
-    "@astrojs/node": "^11.1.2",
-    "@astrojs/react": "^6.0.2",
+    "@astrojs/mdx": "^7.0.7",
+    "@astrojs/node": "^11.1.4",
+    "@astrojs/react": "^6.0.4",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@aws-sdk/client-s3": "^3.1111.0",
@@ -51,8 +51,8 @@
     "@iconify-json/lucide": "^1.2.123",
     "@iconify-json/simple-icons": "^1.2.93",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.2",
-    "astro-icon": "^1.1.5",
+    "astro": "^7.2.4",
+    "astro-icon": "^1.2.0",
     "better-sqlite3": "^12.8.0",
     "clsx": "^2.1.1",
     "cva": "1.0.0-beta.8",
